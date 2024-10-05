@@ -22,3 +22,4 @@ pnpm-debug.log*
 
 # local folders
 .history
+.wrangler
