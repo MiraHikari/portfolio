@@ -6,7 +6,7 @@ import { Icon } from 'astro-icon/components'
 
 <Section className={Astro.props.className} title='Skills'>
   <ul
-    class='inline-flex flex-wrap gap-6 [&>li>svg]:text-skin-hue [&>li]:text-sm'>
+    class='inline-flex print:mt-4 flex-wrap gap-6 [&>li>svg]:text-skin-hue [&>li]:text-sm'>
     {
       skills.map(({ name, icon }) => {
         return (

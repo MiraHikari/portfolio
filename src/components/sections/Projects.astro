@@ -16,19 +16,7 @@ import { projects } from '@cv'
               class='grid-span-1 relative flex flex-col rounded-md bg-skin-button-muted/50 p-5 shadow-sm ring-1 ring-skin-muted'>
               <div class='flex items-center justify-between space-x-[10px]'>
                 <div class='flex items-center gap-2'>
-                  <svg
-                    xmlns='http://www.w3.org/2000/svg'
-                    width='24'
-                    height='24'
-                    viewBox='0 0 24 24'
-                    fill='none'
-                    stroke='currentColor'
-                    stroke-width='2'
-                    stroke-linecap='round'
-                    stroke-linejoin='round'
-                    class='lucide lucide-folder size-4'>
-                    <path d='M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z' />
-                  </svg>
+                  <Icon name='mdi:folder-outline' class='size-4'></Icon>
                   <div class='flex items-center gap-[6px]'>
                     {isActive ? (
                       <a
@@ -38,7 +26,7 @@ import { projects } from '@cv'
                         target='_blank'>
                         {name}
                         <span class='text-skin-hue transition ease-linear group-hover:-translate-y-0.5 group-hover:translate-x-0.5'>
-                          <Icon name='ri:arrow-up-line' class="rotate-45"/>
+                          <Icon name='ri:arrow-up-line' class='rotate-45' />
                         </span>
                       </a>
                     ) : (

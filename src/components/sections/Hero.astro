@@ -13,7 +13,7 @@ const { city, region } = location
       <h1>{name}</h1>
       <h2>{label}</h2>
       <div class='flex items-center gap-2 pt-2 text-sm text-skin-muted'>
-        <Icon name='mdi:world' width={20} height={20} />
+        <Icon class='print:hidden' name='mdi:world' width={20} height={20} />
         {city}, {region}
       </div>
       <footer class='print'>
@@ -27,7 +27,12 @@ const { city, region } = location
               title={`Send email to me`}
               target='_blank'
               rel='noopener noreferrer'>
-              <Icon name='mdi:email' width={20} height={20} />
+              <Icon
+                class='print:hidden'
+                name='mdi:email'
+                width={20}
+                height={20}
+              />
             </a>
           )
         }
@@ -38,28 +43,16 @@ const { city, region } = location
                 href={url}
                 title={`Visit ${name} profile on ${network}`}
                 target='_blank'
+                class='print:hidden'
                 rel='noopener noreferrer'>
-                <Icon name={icon} width={20} height={20} />
+                <Icon class='print:hidden' name={icon} width={20} height={20} />
               </a>
             )
           })
         }
         <div
           class='footer-button group flex h-8 w-9 cursor-pointer items-center justify-center rounded-md text-skin-hue hover:bg-skin-button-accent hover:text-skin-inverted max-sm:hidden print:hidden [&>span]:hover:text-skin-inverted'>
-          <svg
-            xmlns='http://www.w3.org/2000/svg'
-            class='icon icon-tabler icon-tabler-command h-6 w-6'
-            viewBox='0 0 24 24'
-            stroke-width='1.5'
-            stroke='currentColor'
-            fill='none'
-            stroke-linecap='round'
-            stroke-linejoin='round'>
-            <path stroke='none' d='M0 0h24v24H0z' fill='none'></path>
-            <path
-              d='M7 9a2 2 0 1 1 2 -2v10a2 2 0 1 1 -2 -2h10a2 2 0 1 1 -2 2v-10a2 2 0 1 1 2 2h-10'
-            ></path>
-          </svg>
+          <Icon name='ri:command-fill' class="w-6 h-6" />
         </div>
       </footer>
     </div>
