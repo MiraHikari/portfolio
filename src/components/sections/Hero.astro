@@ -1,0 +1,188 @@
+---
+import { basics } from "@cv";
+import Section from "@/components/Section.astro";
+import Mail from "@/icons/Mail.astro";
+import Phone from "@/icons/Phone.astro";
+import X from "@/icons/X.astro";
+import LinkedIn from "@/icons/LinkedIn.astro";
+import GitHub from "@/icons/GitHub.astro";
+import WorldMap from "@/icons/WorldMap.astro";
+import type { SocialIcon } from "@/types";
+
+const { name, label, image, location, profiles, phone, email } = basics;
+const { city, region } = location;
+
+const SOCIAL_ICONS: SocialIcon = {
+	GitHub,
+	LinkedIn,
+	X,
+};
+
+const linkedInfo = profiles.find(({ network }) => network === "LinkedIn");
+const linkedUrl = linkedInfo?.url;
+
+const printInfo = [email, phone, linkedUrl].filter(Boolean).join(" • ");
+---
+
+<Section>
+	<div class="flex flex-col-reverse gap-8">
+		<div class="info">
+			<h1>{name}</h1>
+			<h2>{label}</h2>
+			<div class="flex items-center gap-2 pt-2 text-sm text-skin-muted">
+				<WorldMap />
+				{city}, {region}
+			</div>
+			<footer class="print">
+				{printInfo}
+			</footer>
+			<footer class="no-print">
+				{
+					email && (
+						<div x-data=`{ copyText: '${email}', copyNotification: false, copyToClipboard() { navigator.clipboard.writeText(this.copyText); this.copyNotification = true; let that = this; setTimeout(function(){ that.copyNotification = false; }, 3000); } }` class="relative flex items-center">
+							<div x-show="copyNotification" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 translate-y-3" x-transition:enter-end="opacity-100 translate-x-0" x-transition:leave="transition ease-in duration-300" x-transition:leave-start="opacity-100 translate-x-0" x-transition:leave-end="opacity-0 translate-y-2" style="display:none;" class="absolute left-0" x-cloak>
+								<div class="-mt-1.5 flex h-7 -translate-y-full items-center rounded border-r border-green-500 bg-green-500 px-3 text-xs text-white">
+									<span class="!text-white">Copied!</span>
+									<div class="absolute left-0 bottom-0 inline-block h-full translate-x-full translate-y-5 overflow-hidden">
+										<div class="h-3 w-3 origin-center rotate-45 transform border border-transparent bg-green-500" />
+									</div>
+								</div>
+							</div>
+							<button @click="copyToClipboard();" class="group flex h-8 w-9 cursor-pointer items-center justify-center rounded-md text-skin-muted hover:bg-skin-button-accent hover:text-skin-inverted [&>span]:hover:text-skin-inverted">
+								<svg x-show="copyNotification" class="h-4 w-4 stroke-current text-green-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" x-cloak>
+									<path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+								</svg>
+								<span x-show="!copyNotification">
+									<Mail />
+								</span>
+							</button>
+						</div>
+					)
+				}
+				{
+					phone && (
+						<a href={`tel:${phone}`} title={`Call ${name} at ${phone}`} target="_blank" rel="noopener noreferrer">
+							<Phone />
+						</a>
+					)
+				}
+				{
+					profiles.map(({ network, url }) => {
+						const Icon = SOCIAL_ICONS[network];
+
+						return (
+							<a href={url} title={`Visit ${name} profile on ${network}`} target="_blank" rel="noopener noreferrer">
+								<Icon />
+							</a>
+						);
+					})
+				}
+				<div class="no-print footer-button max-sm:hidden group flex h-8 w-9 cursor-pointer items-center justify-center rounded-md text-skin-hue hover:bg-skin-button-accent hover:text-skin-inverted [&>span]:hover:text-skin-inverted">
+					<svg xmlns="http://www.w3.org/2000/svg" class="icon h-6 w-6 icon-tabler icon-tabler-command"  viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+						<path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+						<path d="M7 9a2 2 0 1 1 2 -2v10a2 2 0 1 1 -2 -2h10a2 2 0 1 1 -2 2v-10a2 2 0 1 1 2 2h-10"></path>
+					</svg>
+				</div>
+			</footer>
+		</div>
+		<figure class="print:hidden w-fit relative">
+			<img class="shadow-lg shadow-skin-hues" src={image} alt={name} />
+			<div class="pointer-events-none absolute -inset-2">
+				<div class="absolute -inset-y-8 right-0 w-px bg-skin-hue/50 [mask-image:linear-gradient(to_top,transparent,white_4rem,white_calc(100%-4rem),transparent)]"></div>
+				<div class="absolute -inset-y-8 left-0 w-px bg-skin-hue/50 [mask-image:linear-gradient(to_top,transparent,white_4rem,white_calc(100%-4rem),transparent)]"></div>
+				<div class="absolute -inset-x-8 bottom-0 h-px bg-skin-hue/50 [mask-image:linear-gradient(to_left,transparent,white_4rem,white_calc(100%-4rem),transparent)]"></div>
+				<div class="absolute -inset-x-8 top-0 h-px bg-skin-hue/50 [mask-image:linear-gradient(to_left,transparent,white_4rem,white_calc(100%-4rem),transparent)]"></div>
+			</div>
+		</figure>
+	</div>
+</Section>
+
+<style>
+	.info {
+		@apply flex flex-col gap-1 pr-8 print:gap-0 print:pr-0;
+	}
+
+	h1 {
+		@apply text-4xl font-bold print:text-3xl;
+	}
+
+	h2 {
+		@apply text-balance text-base text-skin-muted print:text-lg;
+	}
+
+	img {
+		@apply aspect-square w-32 rounded-2xl bg-cover;
+	}
+
+	span {
+		@apply flex items-center gap-1 text-xs text-skin-hue ;
+	}
+
+	footer {
+		@apply mt-2 flex gap-1 text-sm ;
+	}
+
+	footer a, footer button {
+		@apply inline-flex size-8 items-center justify-center rounded-md p-1 transition-all duration-500 ease-linear text-skin-hue hover:bg-skin-button-accent hover:text-skin-inverted;
+	}
+
+	@media (width <= 700px) {
+		.container {
+			flex-direction: column-reverse;
+		}
+
+		.info {
+			@apply md:items-center md:justify-center pr-0 ;
+		}
+
+		figure {
+			@apply flex md:items-center md:justify-center;
+		}
+
+		h2 {
+			text-wrap: balance;
+		}
+
+		figure {
+			@apply md:mx-auto;
+		}
+	}
+</style>
+
+<script>
+	const select = document.getElementById("themeSwitch") as HTMLSelectElement;
+	const theme = localStorage.getItem("theme");
+	const systemTheme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+
+	if (theme !== null) {
+		select.value = theme;
+	} else {
+		select.value = systemTheme;
+	}
+
+	function updateTheme(value: string) {
+		const theme = value === "system" ? systemTheme : value;
+		document.documentElement.classList.remove("light", "dark");
+		document.documentElement.classList.add(theme);
+		localStorage.setItem("theme", value);
+	}
+
+	updateTheme(select.value);
+
+	select.addEventListener("change", (event: Event) => {
+		const select = event.target as HTMLSelectElement;
+		updateTheme(select.value);
+	});
+
+	// Deshabilitar modo oscuro al imprimir
+	window.addEventListener("beforeprint", () => {
+		document.documentElement.classList.remove("dark");
+	});
+
+	// Restaurar el modo oscuro después de imprimir
+	window.addEventListener("afterprint", () => {
+		if (select.value === "dark" || (select.value === "system" && systemTheme === "dark")) {
+			document.documentElement.classList.add("dark");
+		}
+	});
+</script>

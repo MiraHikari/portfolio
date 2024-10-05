@@ -1,0 +1,126 @@
+---
+import { basics } from "@cv";
+import Vengeance from "@/layouts/Vengeance.astro";
+
+interface Props {
+	title: string;
+}
+
+const { title } = Astro.props;
+
+const { image, summary, url, theme } = basics;
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<title>{title}</title>
+		<meta name="description" content={summary} />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="preload" as="image" href={image} />
+
+		<meta property="og:url" content={url} />
+		<meta property="og:type" content="website" />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={summary} />
+		<meta property="og:image" content="" />
+
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta property="twitter:domain" content={url.split("//")[1] ?? ""} />
+		<meta property="twitter:url" content={url} />
+		<meta name="twitter:title" content={title} />
+		<meta name="twitter:description" content={summary} />
+		<meta name="twitter:image" content="" />
+
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Itim" />
+
+		<link rel="stylesheet" href="/themes/themes.css" />
+		<Vengeance />
+	</head>
+	<body data-theme={theme} class="relative bg-skin-fill">
+		<div class="absolute top-0 -z-10 h-full w-full print:hidden">
+			<div class="bg-skin-hue/10 absolute bottom-auto left-[20%] right-auto top-0 h-[200px] w-[200px] -translate-x-[30%] translate-y-[20%] rounded-full blur-[80px] invert-0 dark:bg-white/5"></div>
+		</div>
+		<slot />
+		<style is:global>
+			body,
+			figure {
+				margin: 0;
+				padding: 0;
+			}
+
+			a {
+				text-decoration: none;
+			}
+
+			ul {
+				list-style: none;
+				margin: 0;
+				padding: 0;
+			}
+
+			*,
+			*::before,
+			*::after {
+				box-sizing: border-box;
+			}
+
+			h1,
+			h2,
+			h3,
+			h4 {
+				@apply text-skin-base;
+				margin: 0;
+				font-family:
+					system-ui,
+					-apple-system,
+					BlinkMacSystemFont,
+					"Segoe UI",
+					Roboto,
+					Oxygen,
+					Ubuntu,
+					Cantarell,
+					"Open Sans",
+					"Helvetica Neue",
+					sans-serif;
+			}
+
+			p {
+				@apply text-sm text-skin-muted;
+				line-height: 1.5;
+				text-wrap: pretty;
+			}
+
+			.print {
+				display: none !important;
+			}
+
+			.dev * {
+				@apply border border-red-500/50 bg-red-500/5;
+			}
+			#hotkeypad [data-backdrop] {
+				@apply !bg-zinc-800 !opacity-80;
+			}
+
+			@media print {
+				.no-print {
+					display: none !important;
+				}
+
+				.print {
+					display: block !important;
+				}
+
+				astro-dev-toolbar {
+					display: none !important;
+				}
+
+				article {
+					break-inside: avoid;
+				}
+			}
+		</style>
+	</body>
+</html>

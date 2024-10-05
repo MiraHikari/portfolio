@@ -1,0 +1,150 @@
+---
+import Section from "../Section.astro"
+import { work } from "@cv"
+
+import HTML from "@/icons/html.astro"
+import CSS from "@/icons/css.astro"
+import JavaScript from "@/icons/javascript.astro"
+import TypeScript from "@/icons/type.astro"
+import React from "@/icons/react.astro"
+import Node from "@/icons/node.astro"
+import MySQL from "@/icons/sql.astro"
+import Git from "@/icons/git.astro"
+import GitHub from "@/icons/GitHub.astro"
+import Tailwind from "@/icons/tailwind.astro"
+import Next from "@/icons/next.astro"
+import Swift from "@/icons/swift.astro"
+import SwiftUI from "@/icons/swiftui.astro"
+import Kotlin from "@/icons/kotlin.astro"
+import Flutter from "@/icons/flutter.astro"
+
+const SKILLS_ICONS: Record<string, any> = {
+  HTML,
+  CSS,
+  JavaScript,
+  TypeScript,
+  React,
+  Node,
+  MySQL,
+  Git,
+  GitHub,
+  Next,
+  Tailwind,
+  Swift,
+  SwiftUI,
+  Kotlin,
+  Flutter,
+}
+---
+<Section className={Astro.props.className} title="Experience">
+  <ul class="flex flex-col">
+    {work.map(({ name, startDate, endDate, position, summary, responsibilities, achievements, url, skills, location, location_type }) => {
+      const startYear = new Date(startDate).getFullYear()
+      const endYear = endDate != null ? new Date(endDate).getFullYear() : "Present"
+
+      return (
+        <li class="relative print:py-2">
+          <div class="group relative grid pb-1 print:pb-0 transition-all print:grid-cols-1 print:gap-1 sm:grid-cols-12 sm:gap-8 md:gap-6 lg:hover:!opacity-100 ">
+            <header class="relative mt-1 text-xs font-semibold sm:col-span-2">
+              <time datetime={startDate} data-title={startDate}>{startYear}</time> - <time datetime={endDate} data-title={endDate}>{endYear}</time>
+            </header>
+            <div class="relative flex flex-col pb-6 print:pb-0 before:-ml-6 sm:col-span-10 before:w-px print:before:hidden before:absolute before:bg-skin-muted before:h-full before:mt-2">
+            <div class="absolute w-2 h-2 bg-skin-muted rounded-full mt-2 -translate-x-[1.71rem] ring print:hidden ring-skin-fill"></div>
+              <h3>
+                <div class="inline-flex items-center text-lg print:text-base leading-tight group/link focus-visible:text-amber-500" aria-label="{position} - {company}">
+                  <span>{position} <span>@</span> 
+                  {url ? (
+                    <a class="text-skin-hue" href={url} title={`Ver ${name}`} target="_blank">{name}</a>
+                  ) : (
+                    <span>{name}</span>
+                  )}
+                  {url &&
+                    <span class="inline-block text-skin-hue print:[&>svg]:hidden">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="inline-block w-4 h-4 ml-1 transition-transform translate-y-px shrink-0 group-hover/link:-translate-y-1 group-hover/link:translate-x-1 group-focus-visible/link:-translate-y-1 group-focus-visible/link:translate-x-1 motion-reduce:transition-none" aria-hidden="true">
+                        <path fill-rule="evenodd" d="M5.22 14.78a.75.75 0 001.06 0l7.22-7.22v5.69a.75.75 0 001.5 0v-7.5a.75.75 0 00-.75-.75h-7.5a.75.75 0 000 1.5h5.69l-7.22 7.22a.75.75 0 000 1.06z" clip-rule="evenodd"></path>
+                      </svg>
+                    </span>
+                  }
+                  </span>
+                </div>
+              </h3>
+              {(location || location_type) && (
+                <div class="text-xs text-skin-muted">
+                  {location} {location && location_type && '-'} {location_type}
+                </div>
+              )}
+              <div class="mt-4  print:gap-0 flex flex-col gap-4 print:text-xs text-sm" x-data="{ expanded: false }">
+                {summary && (
+                  <div class="flex flex-col gap-1">
+                    <h4>Summary:</h4>
+                    <ul class="text-skin-muted [&>li]:ml-4 flex list-disc flex-col gap-2">
+                      {Array.isArray(summary) ? (
+                        summary.map(item => (
+                          {item}
+                        ))
+                      ) : (
+                        <li>{summary}</li>
+                      )}
+                    </ul>
+                  </div>
+                )}
+
+                {(responsibilities || achievements) &&  (
+                <div class="md:after:from-skin-hue dark:md:after:to-skin-hue/0  flex relative flex-col max-sm:!h-auto print:!h-auto gap-4 print:gap-2 md:after:bg-gradient-to-t md:after:absolute md:after:bottom-0 md:after:w-full print:after:hidden md:after:h-12 md:after:content-[''] " :class="expanded ? 'after:hidden' : ''" x-show="expanded" x-collapse.min.50px>
+                {responsibilities && (
+                  <div class="flex flex-col gap-1">
+                    <h4>Responsibilities:</h4>
+                    <ul class="text-skin-muted [&>li]:ml-4 flex list-disc flex-col gap-2">
+                      {responsibilities.map(responsibility => (
+                        <li>{responsibility}</li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+
+                {achievements && (
+                  <div class="flex flex-col gap-1">
+                    <h4>Achievements:</h4>
+                    <ul class="text-skin-muted [&>li]:ml-4 flex list-disc flex-col gap-2">
+                      {achievements.map(achievement => (
+                        <li>{achievement}</li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+                </div>
+                
+                <button @click="expanded = ! expanded" class="print:hidden group/more w-fit cursor-pointer items-center justify-center gap-1.5 text-xs underline text-skin-muted transition-all hover:text-skin-base flex">
+                  <span x-text="expanded ? 'Show less' : 'Show more'">Show more</span>
+                  <svg class="w-4 h-4 group-hover/more:translate-y-0.5 duration-200 ease-out" :class="{ 'rotate-180': expanded }" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </button>
+
+
+                <ul class="flex print:hidden flex-wrap gap-2" aria-label="Technologies used">
+                  {skills && skills.map(skill => {
+                    const iconName = skill === "Next.js" ? "Next" : skill
+                    const Icon = SKILLS_ICONS[iconName]
+                    return (
+                      <li class="bg-skin-button-accent/20 border-skin-hue/20 text-skin-hue print:p-0 print:bg-transparent print:text-zinc-800 flex gap-1 items-center border-solid print:border-none border rounded-md px-2 py-0.5 text-xs">
+                        {Icon && <Icon />} <span>{skill}</span>
+                      </li>
+                    )
+                  })}
+                </ul>
+)}
+              </div>
+            </div>
+        </div>
+        </li>
+      )
+    })}
+  </ul>  
+</Section>
+<script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/collapse@3.x.x/dist/cdn.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+<style>
+  li::marker {
+    @apply text-skin-hue
+  }
+</style>
