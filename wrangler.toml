@@ -3,20 +3,6 @@ name = "portafolio"
 compatibility_date = "2024-09-25"
 pages_build_output_dir = "./dist"
 
-# Automatically place your workloads in an optimal location to minimize latency.
-# If you are running back-end logic in a Pages Function, running it closer to your back-end infrastructure
-# rather than the end user may result in better performance.
-# Docs: https://developers.cloudflare.com/pages/functions/smart-placement/#smart-placement
-[placement]
-mode = "smart"
-
-# Variable bindings. These are arbitrary, plaintext strings (similar to environment variables)
-# Docs:
-# - https://developers.cloudflare.com/pages/functions/bindings/#environment-variables
-# Note: Use secrets to store sensitive data.
-# - https://developers.cloudflare.com/pages/functions/bindings/#secrets
-[vars]
-
 # Bind the Workers AI model catalog. Run machine learning models, powered by serverless GPUs, on Cloudflare’s global network
 # Docs: https://developers.cloudflare.com/pages/functions/bindings/#workers-ai
 # [ai]
@@ -24,10 +10,6 @@ mode = "smart"
 
 # Bind a D1 database. D1 is Cloudflare’s native serverless SQL database.
 # Docs: https://developers.cloudflare.com/pages/functions/bindings/#d1-databases
-[[d1_databases]]
-binding = "DB"
-database_name = "prod-emails_forward"
-database_id = "fe17b2fd-b691-4ca3-b913-c070e2845fba"
 
 # Bind a Durable Object. Durable objects are a scale-to-zero compute primitive based on the actor model.
 # Durable Objects can live for as long as needed. Use these when you need a long-running "server", such as in realtime apps.

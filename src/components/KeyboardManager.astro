@@ -3,6 +3,7 @@ import 'hotkeypad/reset.css'
 import 'hotkeypad/index.css'
 import { type SocialIcon } from '@/types'
 import { basics } from '@cv'
+import { Icon } from 'astro-icon/components'
 
 const { profiles } = basics
 
@@ -48,22 +49,7 @@ const profilesInfo = profiles.map(({ network, url }) => {
   </div>
 </footer> -->
 <div class='footer-button print:hidden'>
-  <svg
-    xmlns='http://www.w3.org/2000/svg'
-    class='icon icon-tabler icon-tabler-command'
-    width='32'
-    height='32'
-    viewBox='0 0 24 24'
-    stroke-width='1.5'
-    stroke='#777'
-    fill='none'
-    stroke-linecap='round'
-    stroke-linejoin='round'>
-    <path stroke='none' d='M0 0h24v24H0z' fill='none'></path>
-    <path
-      d='M7 9a2 2 0 1 1 2 -2v10a2 2 0 1 1 -2 -2h10a2 2 0 1 1 -2 2v-10a2 2 0 1 1 2 2h-10'
-    ></path>
-  </svg>
+  <Icon name='ri:command-fill' width={20} height={20}/>
 </div>
 
 <div

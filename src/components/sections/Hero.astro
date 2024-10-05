@@ -1,21 +1,10 @@
 ---
 import { basics } from '@cv'
 import Section from '@/components/Section.astro'
-import Mail from '@/icons/Mail.astro'
-import X from '@/icons/X.astro'
-import GitHub from '@/icons/GitHub.astro'
-import WorldMap from '@/icons/WorldMap.astro'
-import type { SocialIcon } from '@/types'
-import QQ from '@/icons/QQ.astro'
+import { Icon } from 'astro-icon/components'
 
 const { name, label, image, location, profiles, email } = basics
 const { city, region } = location
-
-const SOCIAL_ICONS: SocialIcon = {
-  GitHub,
-  QQ,
-  X,
-}
 ---
 
 <Section>
@@ -24,7 +13,7 @@ const SOCIAL_ICONS: SocialIcon = {
       <h1>{name}</h1>
       <h2>{label}</h2>
       <div class='flex items-center gap-2 pt-2 text-sm text-skin-muted'>
-        <WorldMap />
+        <Icon name='mdi:world' width={20} height={20} />
         {city}, {region}
       </div>
       <footer class='print'>
@@ -38,21 +27,19 @@ const SOCIAL_ICONS: SocialIcon = {
               title={`Send email to me`}
               target='_blank'
               rel='noopener noreferrer'>
-              <Mail />
+              <Icon name='mdi:email' width={20} height={20} />
             </a>
           )
         }
         {
-          profiles.map(({ network, url }) => {
-            const Icon = SOCIAL_ICONS[network]
-
+          profiles.map(({ network, url, icon }) => {
             return (
               <a
                 href={url}
                 title={`Visit ${name} profile on ${network}`}
                 target='_blank'
                 rel='noopener noreferrer'>
-                <Icon />
+                <Icon name={icon} width={20} height={20} />
               </a>
             )
           })

@@ -1,9 +1,8 @@
 ---
-import Moon from '@/icons/Moon.astro'
-import Sun from '@/icons/Sun.astro'
+import { Icon } from 'astro-icon/components'
 ---
 
-<div class='print:hidden inline-flex items-center'>
+<div class='inline-flex items-center print:hidden'>
   <div
     class='group/theme flex cursor-pointer items-center gap-2 rounded-md bg-transparent'>
     <button
@@ -12,14 +11,20 @@ import Sun from '@/icons/Sun.astro'
       aria-label='Toggle dark mode'>
       <i
         class='flex items-center gap-1 text-sm font-medium leading-6 text-skin-base transition-transform ease-in-out group-hover/theme:rotate-45'>
-        <Moon />
-        <Sun />
+        <Icon
+          name='ri:moon-fill'
+          class='hidden dark:block'
+          width={20}
+          height={20}
+        />
+        <Icon name='ri:sun-fill' class='dark:hidden' width={20} height={20} />
       </i>
     </button>
     <select
       id='themeSelect'
-      class='bg-transparent block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-skin-base ring-1 ring-inset ring-skin-muted focus:ring-2 focus:ring-skin-hue sm:text-sm sm:leading-6'>
+      class='block w-full rounded-md border-0 bg-transparent py-1.5 pl-3 pr-10 text-skin-base ring-1 ring-inset ring-skin-muted focus:ring-2 focus:ring-skin-hue sm:text-sm sm:leading-6'>
       <option value='red'>Red</option>
+      <option value='pink'>Pink</option>
       <option value='orange'>Orange</option>
       <option value='cyber'>Cyberpunk</option>
       <option value='green'>Green</option>
