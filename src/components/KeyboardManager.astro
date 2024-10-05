@@ -43,13 +43,13 @@ const profilesInfo = profiles.map(({ network, url }) => {
 })
 ---
 
-<!-- <footer id='normal-footer' class='no-print flex flex-col gap-2'>
+<footer id='normal-footer' class='print:hidden flex flex-col gap-2'>
   <div>
     Press <kbd>Cmd</kbd> + <kbd>K</kbd> to open the command palette.
   </div>
-</footer> -->
+</footer>
 <div class='footer-button print:hidden'>
-  <Icon name='ri:command-fill' width={20} height={20}/>
+  <Icon name='ri:command-fill' width={20} height={20} class="text-skin-hue"/>
 </div>
 
 <div
