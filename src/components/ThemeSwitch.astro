@@ -104,6 +104,7 @@ import { Icon } from 'astro-icon/components'
   const themeSelect = document.getElementById(
     'themeSelect'
   ) as HTMLSelectElement
+
   if (themeSelect) {
     themeSelect.addEventListener('change', e => {
       const selectedTheme = (e.target as HTMLSelectElement).value
@@ -122,8 +123,12 @@ import { Icon } from 'astro-icon/components'
   }
 
   // Initialize data-theme based on stored value or default
-  const storedDataTheme = localStorage.getItem('data-theme') || 'red'
+  const storedDataTheme =
+    localStorage.getItem('data-theme') ||
+    document.body.getAttribute('data-theme')!
+
   updateDataTheme(storedDataTheme)
+
   if (themeSelect) {
     themeSelect.value = storedDataTheme
   }
