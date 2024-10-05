@@ -2,6 +2,7 @@
 import { basics } from '@cv'
 import Section from '@/components/Section.astro'
 import { Icon } from 'astro-icon/components'
+import { Image } from 'astro:assets'
 
 const { name, label, image, location, profiles, email } = basics
 const { city, region, address } = location
@@ -57,7 +58,7 @@ const { city, region, address } = location
       </footer>
     </div>
     <figure class='relative w-fit print:hidden'>
-      <img class='shadow-skin-hues shadow-lg' src={image} alt={name} />
+      <Image class='shadow-skin-hues shadow-lg' height={1920} width={1080}  src={image} alt={name} />
       <div class='pointer-events-none absolute -inset-2'>
         <div
           class='absolute -inset-y-8 right-0 w-px bg-skin-hue/50 [mask-image:linear-gradient(to_top,transparent,white_4rem,white_calc(100%-4rem),transparent)]'>
