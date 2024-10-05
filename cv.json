@@ -8,6 +8,7 @@
     "summary": "Born in 2010, I primarily work with TypeScript and JavaScript for full-stack development, and enjoy working with various technologies.",
     "theme": "red",
     "location": {
+      "address":"Nanchang",
       "city": "Jiangxi Province",
       "countryCode": "CN",
       "region": "China"
@@ -15,23 +16,27 @@
     "profiles": [
       {
         "network": "Bilibili",
-        "icon":"ri:bilibili-line",
+        "icon": "ri:bilibili-line",
         "username": "MiraHikari",
         "url": "https://space.bilibili.com/480025691"
       },
       {
         "network": "QQ",
-        "icon":"ri:qq-fill",
+        "icon": "ri:qq-fill",
         "username": "Gong_cx",
         "url": "https://admin.qidian.qq.com/static_proxy/b2b-qq/wpa-link/index.html#/person?uin=3175992523"
       },
       {
         "network": "GitHub",
-        "icon":"mdi:github",
+        "icon": "mdi:github",
         "username": "MiraHikari",
         "url": "https://github.com/MiraHikari"
       }
-    ]
+    ],
+    "beian": {
+      "mint": "赣ICP备2021005460号-1",
+      "police": "赣公网安备 36010302000349号"
+    }
   },
   "work": [
     {
