@@ -9,14 +9,22 @@ import { projects } from '@cv'
   <div class='grid grid-cols-1 gap-3 md:grid-cols-2 print:flex print:flex-col'>
     {
       projects.map(
-        ({ url, description, highlights, name, isActive, github }) => {
+        ({ url, description, highlights, name, isActive, github, bgUrl }) => {
           return (
             <div
+              data-clicked='false'
               role='contentinfo'
-              class='grid-span-1 relative flex flex-col rounded-md bg-skin-button-muted/50 p-5 shadow-sm ring-1 ring-skin-muted'>
-              <div class='flex items-center justify-between space-x-[10px]'>
+              class:list={['project-container grid-span-1 group relative flex min-h-96 flex-col overflow-hidden rounded-md bg-skin-button-muted/50 p-5 shadow-sm ring-1 ring-skin-muted', bgUrl ? 'cursor-pointer' : '']}>
+              {bgUrl && (
+                <div
+                  class='absolute inset-0 bg-cover transform bg-center bg-no-repeat opacity-30 blur-sm grayscale transition-all duration-300 group-data-[clicked=true]:opacity-100 group-data-[clicked=true]:blur-none group-data-[clicked=true]:grayscale-0'
+                  style={{ backgroundImage: `url(${bgUrl})` }}
+                />
+              )}
+              <div
+                class={`relative z-10 flex items-center justify-between space-x-[10px] ${bgUrl ? 'group-data-[clicked=true]:hidden' : ''}`}>
                 <div class='flex items-center gap-2'>
-                  <Icon name='mdi:folder-outline' class='size-4'></Icon>
+                  <Icon name='mdi:folder-outline' class='size-4' />
                   <div class='flex items-center gap-[6px]'>
                     {isActive ? (
                       <a
@@ -25,7 +33,7 @@ import { projects } from '@cv'
                         title={`Ver ${name}`}
                         target='_blank'>
                         {name}
-                        <span class='text-skin-hue transition ease-linear group-hover:-translate-y-0.5 group-hover:translate-x-0.5'>
+                        <span class='text-skin-hue transition ease-linear group-data-[clicked=true]:-translate-y-0.5 group-data-[clicked=true]:translate-x-0.5'>
                           <Icon name='ri:arrow-up-line' class='rotate-45' />
                         </span>
                       </a>
@@ -47,8 +55,12 @@ import { projects } from '@cv'
                 )}
               </div>
 
-              <p class='py-3 text-sm text-skin-base'>{description}</p>
-              <ul class='mt-1 text-sm text-skin-muted'>
+              <p
+                class={`relative z-10 py-3 text-sm text-skin-base ${bgUrl ? 'group-data-[clicked=true]:hidden' : ''}`}>
+                {description}
+              </p>
+              <ul
+                class={`relative z-10 mt-1 text-sm text-skin-inverted ${bgUrl ? 'group-data-[clicked=true]:hidden' : ''}`}>
                 {highlights.map(highlight => {
                   return <li>{highlight}</li>
                 })}
@@ -60,6 +72,16 @@ import { projects } from '@cv'
     }
   </div>
 </Section>
+
+<script>
+  const projectContainers = document.querySelectorAll<HTMLDivElement>('.project-container')
+  projectContainers.forEach(projectContainer => {
+    projectContainer.addEventListener('click', () => {
+      const isClicked = projectContainer.dataset.clicked === 'true'
+      projectContainer.dataset.clicked = !isClicked ? 'true' : 'false'
+    })
+  })
+</script>
 
 <style>
   ul {
@@ -83,16 +105,5 @@ import { projects } from '@cv'
     font-size: 0.6rem;
     font-weight: 500;
     padding: 0.2rem 0.6rem;
-  }
-  @keyframes flicker {
-    0% {
-      opacity: 1;
-    }
-    50% {
-      opacity: 0.25;
-    }
-    100% {
-      opacity: 1;
-    }
   }
 </style>
