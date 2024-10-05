@@ -1,46 +1,134 @@
 ---
-import Layout from "@/layouts/Layout.astro";
+import Layout from '@/layouts/Layout.astro'
 
-import About from "@/components/sections/About.astro";
-import Education from "@/components/sections/Education.astro";
-import Experience from "@/components/sections/Experience.astro";
-import Hero from "@/components/sections/Hero.astro";
-import Projects from "@/components/sections/Projects.astro";
-import Skills from "@/components/sections/Skills.astro";
-import Tail from "@/components/sections/Tail.astro";
-import KeyboardManager from "@/components/KeyboardManager.astro";
-import ThemeSwitch from "@/components/ThemeSwitch.astro";
+import About from '@/components/sections/About.astro'
+import Experience from '@/components/sections/Experience.astro'
+import Hero from '@/components/sections/Hero.astro'
+import Projects from '@/components/sections/Projects.astro'
+import Skills from '@/components/sections/Skills.astro'
+import Tail from '@/components/sections/Tail.astro'
+import KeyboardManager from '@/components/KeyboardManager.astro'
+import ThemeSwitch from '@/components/ThemeSwitch.astro'
 
-import { basics } from "@cv";
-const { name, label } = basics;
+import { basics } from '@cv'
+const { name, label } = basics
 ---
 
 <Layout title={`${name} Portafolio - ${label}`}>
-	<main class="relative grid max-w-7xl gap-12 p-8 max-sm:py-16 md:grid-cols-6 md:p-16 xl:gap-24 print:max-w-none print:grid-cols-1 print:gap-6">
-		<div class="space-y-6 md:col-span-2 print:col-span-1 print:grid print:grid-cols-2 print:gap-5 print:space-y-0">
-			<Hero />
-			<About />
-			<ThemeSwitch />
-		</div>
-		<div class="space-y-12 md:col-span-4 print:col-span-1 print:grid print:grid-cols-4 print:gap-2 print:space-y-0">
-			<Experience className="print:col-span-3" />
-			<Projects className="print:hidden" />
-			<Skills className="print:hidden" />
-			<Education className="order-first" />
-		</div>
-		<Tail />
-	</main>
-
-	<KeyboardManager />
+  <main
+    class='relative duration-1000 grid max-w-7xl gap-12 p-8 max-sm:py-16 md:grid-cols-6 md:p-16 xl:gap-24 print:max-w-none print:grid-cols-1 print:gap-6'>
+    <div
+      class='slide-enter space-y-6 ease-in md:col-span-2 print:col-span-1 print:grid print:grid-cols-2 print:gap-5 print:space-y-0'>
+      <Hero />
+      <About />
+      <ThemeSwitch />
+    </div>
+    <div
+      class='slide-enter-content space-y-12 md:col-span-4 print:col-span-1 print:grid print:grid-cols-4 print:gap-2 print:space-y-0'>
+      <Experience className='print:col-span-3' />
+      <Projects className='print:hidden' />
+      <Skills className='' />
+    </div>
+    <Tail />
+  </main>
+  <KeyboardManager />
 </Layout>
 
 <style>
-	@page {
-		size: auto;
-		margin: 0mm;
-	}
-	main {
-		margin: auto;
-		width: 100%;
-	}
+  @page {
+    size: auto;
+    margin: 0mm;
+  }
+  main {
+    margin: auto;
+    width: 100%;
+  }
+  @keyframes slide-enter {
+    0% {
+      transform: translateY(10px);
+      opacity: 0;
+    }
+
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    html:not(.no-sliding) [slide-enter],
+    html:not(.no-sliding) .slide-enter,
+    html:not(.no-sliding)
+      .slide-enter-content
+      > *:not(:has(.table-of-contents)) {
+      --enter-stage: 0;
+      --enter-step: 90ms;
+      --enter-initial: 0ms;
+      animation: slide-enter 1s both 1;
+      animation-delay: calc(
+        var(--enter-initial) + var(--enter-stage) * var(--enter-step)
+      );
+    }
+
+    .slide-enter-content > *:nth-child(1) {
+      --enter-stage: 1 !important;
+    }
+    .slide-enter-content > *:nth-child(2) {
+      --enter-stage: 2 !important;
+    }
+    .slide-enter-content > *:nth-child(3) {
+      --enter-stage: 3 !important;
+    }
+    .slide-enter-content > *:nth-child(4) {
+      --enter-stage: 4 !important;
+    }
+    .slide-enter-content > *:nth-child(5) {
+      --enter-stage: 5 !important;
+    }
+    .slide-enter-content > *:nth-child(6) {
+      --enter-stage: 6 !important;
+    }
+    .slide-enter-content > *:nth-child(7) {
+      --enter-stage: 7 !important;
+    }
+    .slide-enter-content > *:nth-child(8) {
+      --enter-stage: 8 !important;
+    }
+    .slide-enter-content > *:nth-child(9) {
+      --enter-stage: 9 !important;
+    }
+    .slide-enter-content > *:nth-child(10) {
+      --enter-stage: 10 !important;
+    }
+    .slide-enter-content > *:nth-child(11) {
+      --enter-stage: 11 !important;
+    }
+    .slide-enter-content > *:nth-child(12) {
+      --enter-stage: 12 !important;
+    }
+    .slide-enter-content > *:nth-child(13) {
+      --enter-stage: 13 !important;
+    }
+    .slide-enter-content > *:nth-child(14) {
+      --enter-stage: 14 !important;
+    }
+    .slide-enter-content > *:nth-child(15) {
+      --enter-stage: 15 !important;
+    }
+    .slide-enter-content > *:nth-child(16) {
+      --enter-stage: 16 !important;
+    }
+    .slide-enter-content > *:nth-child(17) {
+      --enter-stage: 17 !important;
+    }
+    .slide-enter-content > *:nth-child(18) {
+      --enter-stage: 18 !important;
+    }
+    .slide-enter-content > *:nth-child(19) {
+      --enter-stage: 19 !important;
+    }
+    .slide-enter-content > *:nth-child(20) {
+      --enter-stage: 20 !important;
+    }
+  }
 </style>

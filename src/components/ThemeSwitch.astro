@@ -1,55 +1,155 @@
 ---
-import Theme from "@/icons/themeSwitch.astro";
+import Moon from '@/icons/Moon.astro'
+import Sun from '@/icons/Sun.astro'
 ---
 
-<div class="no-print inline-flex items-center">
-	<!-- <div class="flex items-center gap-1">
-		<Theme />
-		<select name="themeSwitch" id="themeSwitch" class="block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 dark:text-gray-100 dark:ring-gray-700 sm:text-sm sm:leading-6">
-			<option value="system">System</option>
-			<option value="dark">Dark</option>
-			<option value="light">Light</option>
-		</select>
-	</div> -->
-
-	<div class="group/theme flex items-center gap-2">
-		<label for="themeSwitch" class="flex items-center gap-1 text-sm font-medium leading-6 text-skin-base transition-transform ease-in-out group-hover/theme:rotate-45"> <Theme /></label>
-		<select id="themeSwitch" name="themeSwitch" class="focus:ring-skin-hue ring-skin-muted block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-skin-base ring-1 ring-inset focus:ring-2 sm:text-sm sm:leading-6">
-			<option value="system">System</option>
-			<option value="dark">Dark</option>
-			<option value="light">Light</option>
-		</select>
-	</div>
-
-	<style>
-		:global(.dark) {
-			color-scheme: dark;
-		}
-	</style>
-
-	<script>
-		const select = document.getElementById("themeSwitch") as HTMLSelectElement;
-		const theme = localStorage.getItem("theme");
-		const systemTheme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
-
-		if (theme !== null) {
-			select.value = theme;
-		} else {
-			select.value = systemTheme;
-		}
-
-		function updateTheme(value: string) {
-			const theme = value === "system" ? systemTheme : value;
-			document.documentElement.classList.remove("light", "dark");
-			document.documentElement.classList.add(theme);
-			localStorage.setItem("theme", value);
-		}
-
-		updateTheme(select.value);
-
-		select.addEventListener("change", (event: Event) => {
-			const select = event.target as HTMLSelectElement;
-			updateTheme(select.value);
-		});
-	</script>
+<div class='print:hidden inline-flex items-center'>
+  <div
+    class='group/theme flex cursor-pointer items-center gap-2 rounded-md bg-transparent'>
+    <button
+      id='themeSwitch'
+      class='cursor-pointer'
+      aria-label='Toggle dark mode'>
+      <i
+        class='flex items-center gap-1 text-sm font-medium leading-6 text-skin-base transition-transform ease-in-out group-hover/theme:rotate-45'>
+        <Moon />
+        <Sun />
+      </i>
+    </button>
+    <select
+      id='themeSelect'
+      class='bg-transparent block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-skin-base ring-1 ring-inset ring-skin-muted focus:ring-2 focus:ring-skin-hue sm:text-sm sm:leading-6'>
+      <option value='red'>Red</option>
+      <option value='orange'>Orange</option>
+      <option value='cyber'>Cyberpunk</option>
+      <option value='green'>Green</option>
+      <option value='blue'>Blue</option>
+    </select>
+  </div>
 </div>
+
+<style>
+  :global(.dark) {
+    color-scheme: dark;
+  }
+</style>
+
+<script>
+  let isDark = document.documentElement.classList.contains('dark')
+
+  function toggleDark(event: MouseEvent) {
+    const isAppearanceTransition =
+      'startViewTransition' in document &&
+      !window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
+    if (!isAppearanceTransition) {
+      isDark = !isDark
+      updateTheme()
+      return
+    }
+
+    const x = event.clientX
+    const y = event.clientY
+    const endRadius = Math.hypot(
+      Math.max(x, innerWidth - x),
+      Math.max(y, innerHeight - y)
+    )
+
+    // @ts-ignore
+    const transition = document.startViewTransition(async () => {
+      isDark = !isDark
+      updateTheme()
+    })
+
+    transition.ready.then(() => {
+      const clipPath = [
+        `circle(0px at ${x}px ${y}px)`,
+        `circle(${endRadius}px at ${x}px ${y}px)`,
+      ]
+      document.documentElement.animate(
+        {
+          clipPath: isDark ? [...clipPath].reverse() : clipPath,
+        },
+        {
+          duration: 400,
+          easing: 'ease-out',
+          pseudoElement: isDark
+            ? '::view-transition-old(root)'
+            : '::view-transition-new(root)',
+        }
+      )
+    })
+  }
+
+  function updateTheme() {
+    document.documentElement.classList.toggle('dark', isDark)
+    localStorage.setItem('theme', isDark ? 'dark' : 'light')
+  }
+
+  function updateDataTheme(value: string) {
+    document.body.setAttribute('data-theme', value)
+    localStorage.setItem('data-theme', value)
+  }
+
+  const themeSwitchButton = document.getElementById('themeSwitch')
+  if (themeSwitchButton) {
+    themeSwitchButton.addEventListener('click', toggleDark)
+  }
+
+  const themeSelect = document.getElementById(
+    'themeSelect'
+  ) as HTMLSelectElement
+  if (themeSelect) {
+    themeSelect.addEventListener('change', e => {
+      const selectedTheme = (e.target as HTMLSelectElement).value
+      updateDataTheme(selectedTheme)
+    })
+  }
+
+  // Initialize theme based on user preference or system setting
+  if (
+    localStorage.theme === 'dark' ||
+    (!('theme' in localStorage) &&
+      window.matchMedia('(prefers-color-scheme: dark)').matches)
+  ) {
+    isDark = true
+    updateTheme()
+  }
+
+  // Initialize data-theme based on stored value or default
+  const storedDataTheme = localStorage.getItem('data-theme') || 'red'
+  updateDataTheme(storedDataTheme)
+  if (themeSelect) {
+    themeSelect.value = storedDataTheme
+  }
+
+  // Listen for changes in system color scheme
+  window
+    .matchMedia('(prefers-color-scheme: dark)')
+    .addEventListener('change', e => {
+      if (!('theme' in localStorage)) {
+        isDark = e.matches
+        updateTheme()
+      }
+    })
+</script>
+
+<style is:global>
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none;
+    mix-blend-mode: normal;
+  }
+  ::view-transition-old(root) {
+    z-index: 1;
+  }
+  ::view-transition-new(root) {
+    z-index: 9999;
+  }
+  .dark::view-transition-old(root) {
+    z-index: 9999;
+  }
+  .dark::view-transition-new(root) {
+    z-index: 1;
+  }
+</style>
