@@ -54,8 +54,8 @@ enum PageLayout {
       <>
         <div class="border-t border-solid border-skin-hue print:hidden" />
         {CV?.pageLayout === PageLayout.SingleColumn && (
-          <main class="relative grid gap-12 p-8 max-sm:py-16 md:grid-cols-6 md:p-16 xl:gap-24 print:max-w-none print:grid-cols-1 print:gap-6">
-            <div class="slide-enter-content space-y-4 md:col-span-6">
+          <main class="relative max-w-[88rem] grid gap-12 p-8 max-sm:py-16 md:grid-cols-6 md:p-16 xl:gap-24 print:max-w-none print:grid-cols-1 print:gap-6">
+            <div class="slide-enter-content space-y-6 md:col-span-6">
               <Projects className="print:hidden" />
               {CV?.images && <Images className="print:hidden" />}
               {CV?.education && <Education className="order-first" />}

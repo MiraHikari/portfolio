@@ -1,6 +1,6 @@
 {
   "analyticsCode": "/clarity.js",
-  "pageLayout": "single-column",
+  "pageLayout": "two-column",
   "basics": {
     "name": "MiraHikari",
     "label": "Junior Full Stack Developer",
