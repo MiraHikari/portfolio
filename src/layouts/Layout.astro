@@ -1,5 +1,6 @@
 ---
 import ArtPlums from '@/components/ArtPlums.astro'
+import '@fancyapps/ui/dist/fancybox/fancybox.css'
 import { basics } from '@cv'
 
 interface Props {
@@ -20,13 +21,12 @@ const { image, summary, url, theme } = basics
     <meta name='viewport' content='width=device-width' />
     <link rel='icon' href='/avatar.png' />
     <link rel='preload' as='image' href={image} />
-
     <meta property='og:url' content={url} />
     <meta property='og:type' content='website' />
     <meta property='og:title' content={title} />
     <meta property='og:description' content={summary} />
     <meta property='og:image' content='' />
-
+    <meta name='referrer' content='no-referrer' />
     <meta name='twitter:card' content='summary_large_image' />
     <meta property='twitter:domain' content={url.split('//')[1] ?? ''} />
     <meta property='twitter:url' content={url} />

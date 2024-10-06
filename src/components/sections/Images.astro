@@ -11,19 +11,23 @@ const images = CV.images!
     {
       images &&
         images.map(({ image, alt, desc }) => (
-          <div class='group relative h-auto max-w-prose rounded-lg border border-solid border-skin-hue/20 bg-skin-button-accent/20 p-1 text-skin-hue'>
-            <Image
-              src={image}
-              alt={alt}
-              height={1920}
-              width={1080}
-              class='rounded-lg max-w-full'
-            />
-            <p class='absolute inset-0 flex items-center justify-center rounded-lg bg-skin-muted bg-opacity-50 p-6 text-center text-white opacity-0 backdrop-blur-sm transition-all duration-300 group-hover:opacity-100'>
-              {desc}
-            </p>
+          <div class='h-auto max-w-prose rounded-lg border border-solid border-skin-hue/20 bg-skin-button-accent/20 p-1 text-skin-hue'>
+            <a data-src={image} data-fancybox='images' data-caption={desc}>
+              <Image
+                src={image}
+                alt={alt}
+                height={1920}
+                width={1080}
+                class='max-w-full rounded-lg'
+              />
+            </a>
           </div>
         ))
     }
   </div>
 </Section>
+
+<script>
+  import { Fancybox } from '@fancyapps/ui'
+  Fancybox.bind('[data-fancybox="images"]', { hideScrollbar: false })
+</script>

@@ -3,26 +3,32 @@ import Section from '../Section.astro'
 import { Icon } from 'astro-icon/components'
 
 import { projects } from '@cv'
+import { Image } from 'astro:assets'
 ---
 
 <Section className={Astro.props.className} title='Projects'>
   <div class='grid grid-cols-1 gap-3 md:grid-cols-2 print:flex print:flex-col'>
     {
       projects.map(
-        ({ url, description, highlights, name, isActive, github, bgUrl }) => {
+        ({ url, description, highlights, name, isActive, github, image }) => {
+          const isBackgroundImage = image && image?.position === 'background'
+          const isContainerImage = image && image?.position === 'container'
           return (
             <div
-              data-clicked='false'
               role='contentinfo'
-              class:list={['project-container grid-span-1 group relative flex min-h-96 flex-col overflow-hidden rounded-md bg-skin-button-muted/50 p-5 shadow-sm ring-1 ring-skin-muted', bgUrl ? 'cursor-pointer' : '']}>
-              {bgUrl && (
-                <div
-                  class='absolute inset-0 bg-cover transform bg-center bg-no-repeat opacity-30 blur-sm grayscale transition-all duration-300 group-data-[clicked=true]:opacity-100 group-data-[clicked=true]:blur-none group-data-[clicked=true]:grayscale-0'
-                  style={{ backgroundImage: `url(${bgUrl})` }}
-                />
+              class:list={[
+                'project-container grid-span-1 group relative flex min-h-96 flex-col overflow-hidden rounded-md bg-skin-button-muted/50 p-5 shadow-sm ring-1 ring-skin-muted',
+              ]}>
+              {isBackgroundImage && (
+                <a data-src={image.url} data-fancybox='projects'>
+                  <div
+                    class='absolute inset-0 transform bg-cover bg-center bg-no-repeat opacity-30 blur-sm grayscale transition-all duration-300'
+                    style={{ backgroundImage: `url(${image.url})` }}
+                  />
+                </a>
               )}
               <div
-                class={`relative z-10 flex items-center justify-between space-x-[10px] ${bgUrl ? 'group-data-[clicked=true]:hidden' : ''}`}>
+                class={`relative z-10 flex items-center justify-between space-x-[10px]`}>
                 <div class='flex items-center gap-2'>
                   <Icon name='mdi:folder-outline' class='size-4' />
                   <div class='flex items-center gap-[6px]'>
@@ -55,16 +61,28 @@ import { projects } from '@cv'
                 )}
               </div>
 
-              <p
-                class={`relative z-10 py-3 text-sm text-skin-base ${bgUrl ? 'group-data-[clicked=true]:hidden' : ''}`}>
+              <p class={`relative z-10 py-3 text-sm text-skin-base`}>
                 {description}
               </p>
-              <ul
-                class={`relative z-10 mt-1 text-sm text-skin-inverted ${bgUrl ? 'group-data-[clicked=true]:hidden' : ''}`}>
+              <ul class={`relative z-10 mt-1 text-sm text-skin-inverted`}>
                 {highlights.map(highlight => {
                   return <li>{highlight}</li>
                 })}
               </ul>
+              {isContainerImage && (
+                <a data-src={image.url} data-fancybox='projects'>
+                  <Image
+                    src={image.url}
+                    alt=''
+                    width={1920}
+                    height={1080}
+                    class='mt-3 max-w-full rounded-lg'
+                  />
+                </a>
+              )}
+              {isBackgroundImage && (
+                <p class='absolute bottom-2 right-2 text-skin-muted text-sm font-mono'>Click blank to enlarge</p>
+              )}
             </div>
           )
         }
@@ -72,15 +90,9 @@ import { projects } from '@cv'
     }
   </div>
 </Section>
-
 <script>
-  const projectContainers = document.querySelectorAll<HTMLDivElement>('.project-container')
-  projectContainers.forEach(projectContainer => {
-    projectContainer.addEventListener('click', () => {
-      const isClicked = projectContainer.dataset.clicked === 'true'
-      projectContainer.dataset.clicked = !isClicked ? 'true' : 'false'
-    })
-  })
+  import { Fancybox } from '@fancyapps/ui'
+  Fancybox.bind('[data-fancybox="projects"]', { hideScrollbar: false })
 </script>
 
 <style>
