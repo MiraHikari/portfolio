@@ -24,7 +24,7 @@ enum PageLayout {
 
 <Layout title={`${name}'s' Portfolio - ${label}`}>
   <main
-    class="relative grid h-full md:min-h-screen max-w-7xl gap-12 p-8 max-sm:py-16 md:grid-cols-6 md:p-16 xl:gap-24 print:max-w-none print:grid-cols-1 print:gap-6"
+    class="relative grid h-full max-w-7xl gap-12 p-8 max-sm:py-16 md:min-h-screen md:grid-cols-6 md:p-16 xl:gap-24 print:max-w-none print:grid-cols-1 print:gap-6"
   >
     <div
       class="slide-enter space-y-6 ease-in md:col-span-2 print:col-span-1 print:grid print:grid-cols-2 print:gap-5 print:space-y-0"
@@ -54,7 +54,7 @@ enum PageLayout {
       <>
         <div class="border-t border-solid border-skin-hue print:hidden" />
         {CV?.pageLayout === PageLayout.SingleColumn && (
-          <main class="relative max-w-[88rem] grid gap-12 p-8 max-sm:py-16 md:grid-cols-6 md:p-16 xl:gap-24 print:max-w-none print:grid-cols-1 print:gap-6">
+          <main class="relative grid max-w-[88rem] gap-12 p-8 max-sm:py-16 md:grid-cols-6 md:p-16 xl:gap-24 print:max-w-none print:grid-cols-1 print:gap-6">
             <div class="slide-enter-content space-y-6 md:col-span-6">
               <Projects className="print:hidden" />
               {CV?.images && <Images className="print:hidden" />}
@@ -68,9 +68,9 @@ enum PageLayout {
           <main class="max-w-[97%] p-8 max-md:!max-w-7xl max-sm:py-16 print:max-w-none print:grid-cols-1 print:gap-6">
             <div
               id="carousel"
-              class="slide-enter-content scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-200 mx-auto md:overflow-x-auto md:overflow-y-auto md:col-span-6 print:max-w-none print:grid-cols-1 print:gap-6"
+              class="slide-enter-content scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-200 mx-auto md:col-span-6 md:overflow-x-auto md:overflow-y-auto print:max-w-none print:grid-cols-1 print:gap-6"
             >
-              <div class="flex space-x-0 pb-4 max-sm:flex-col max-sm:space-y-4 md:px-4 max-md:gap-4">
+              <div class="flex space-x-0 pb-4 max-md:gap-4 max-sm:flex-col max-sm:space-y-4 md:px-4">
                 <Projects className="flex-shrink-0 w-full print:hidden border-skin-hue md:border-solid md:border md:p-4" />
                 {CV?.images && (
                   <Images className="flex-shrink-0 w-full print:hidden border-skin-hue md:border-solid md:border md:p-4" />
@@ -91,59 +91,58 @@ enum PageLayout {
 </Layout>
 
 <script>
-  let isScrolling = true;
-  let scrollSpeed = 2;
-  let direction = 1;
-  let pauseTimeout: NodeJS.Timeout;
+  const carousel = document.querySelector("#carousel");
 
-  // 自动滚动功能
-  const startAutoScroll = () => {
-    const carousel = document.querySelector("#carousel")!;
-    const scroll = () => {
-      if (!isScrolling) return;
+  if (carousel) {
+    let isScrolling = true;
+    let scrollSpeed = 2;
+    let direction = 1;
+    let pauseTimeout: NodeJS.Timeout;
 
-      if (
-        //@ts-ignore
-        carousel.scrollLeft + carousel.offsetWidth >= carousel.scrollWidth ||
-        carousel.scrollLeft <= 0
-      ) {
-        direction *= -1;
-        isScrolling = false;
-        clearTimeout(pauseTimeout);
-        pauseTimeout = setTimeout(() => {
-          isScrolling = true;
-          requestAnimationFrame(scroll);
-        }, 1000);
-      }
+    const startAutoScroll = () => {
+      const scroll = () => {
+        if (!isScrolling) return;
 
-      carousel.scrollLeft += scrollSpeed * direction;
+        if (
+          //@ts-ignore
+          carousel.scrollLeft + carousel.offsetWidth >= carousel.scrollWidth ||
+          carousel.scrollLeft <= 0
+        ) {
+          direction *= -1;
+          isScrolling = false;
+          clearTimeout(pauseTimeout);
+          pauseTimeout = setTimeout(() => {
+            isScrolling = true;
+            requestAnimationFrame(scroll);
+          }, 1000);
+        }
+
+        carousel.scrollLeft += scrollSpeed * direction;
+        requestAnimationFrame(scroll);
+      };
+
       requestAnimationFrame(scroll);
     };
 
-    requestAnimationFrame(scroll);
-  };
+    const stopAutoScroll = () => {
+      isScrolling = false;
+    };
 
-  const stopAutoScroll = () => {
-    isScrolling = false;
-  };
+    const handleUserInteraction = () => {
+      stopAutoScroll();
+      setTimeout(() => {
+        isScrolling = true;
+      }, 500);
+    };
 
-  // 停止自动滚动的条件
-  const handleUserInteraction = () => {
-    stopAutoScroll();
-    setTimeout(() => {
-      isScrolling = true;
-    }, 500);
-  };
+    startAutoScroll();
 
-  const carousel = document.getElementById("carousel")!;
-
-  // 启动自动滚动
-  startAutoScroll();
-
-  // 检测用户滚动交互，停止自动滚动
-  carousel.addEventListener("mousedown", handleUserInteraction);
-  carousel.addEventListener("wheel", handleUserInteraction);
-  carousel.addEventListener("touchstart", handleUserInteraction);
+    carousel.addEventListener("mousedown", handleUserInteraction);
+    carousel.addEventListener("wheel", handleUserInteraction);
+    carousel.addEventListener("touchstart", handleUserInteraction);
+  } else {
+    console.log('Not in Scroll mode')
+  }
 </script>
 
 <style>
