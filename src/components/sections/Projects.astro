@@ -1,46 +1,58 @@
 ---
-import Section from '../Section.astro'
-import { Icon } from 'astro-icon/components'
+import Section from "../Section.astro";
+import { Icon } from "astro-icon/components";
 
-import { projects } from '@cv'
-import { Image } from 'astro:assets'
+import { projects } from "@cv";
+import { Image } from "astro:assets";
 ---
 
-<Section className={Astro.props.className} title='Projects'>
-  <div class='grid grid-cols-1 gap-3 md:grid-cols-2 print:flex print:flex-col'>
+<Section className={Astro.props.className} title="Projects">
+  <div class="grid grid-cols-1 gap-3 md:grid-cols-2 print:flex print:flex-col">
     {
       projects.map(
         ({ url, description, highlights, name, isActive, github, image }) => {
-          const isBackgroundImage = image && image?.position === 'background'
-          const isContainerImage = image && image?.position === 'container'
+          const isBackgroundImage = image && image?.position === "background";
+          const isContainerImage = image && image?.position === "container";
           return (
             <div
-              role='contentinfo'
+              role="contentinfo"
               class:list={[
-                'project-container grid-span-1 group relative flex min-h-80 flex-col overflow-hidden rounded-md bg-skin-button-muted/50 p-5 shadow-sm ring-1 ring-skin-muted',
-              ]}>
+                "project-container grid-span-1 group relative flex min-h-80 flex-col overflow-hidden rounded-md bg-skin-button-muted/50 p-5 shadow-sm ring-1 ring-skin-muted",
+              ]}
+            >
               {isBackgroundImage && (
-                <a data-src={image.url} data-fancybox='projects'>
+                <a data-src={image.url} data-fancybox="projects">
                   <div
-                    class='absolute inset-0 transform bg-cover bg-center bg-no-repeat opacity-30 blur-sm grayscale transition-all duration-300'
+                    class:list={[
+                      "absolute inset-0 transform bg-cover bg-center bg-no-repeat opacity-30 blur-sm grayscale transition-all duration-300",
+                      image.dark ? "dark:hidden" : "",
+                    ]}
                     style={{ backgroundImage: `url(${image.url})` }}
                   />
+                  {image.dark && (
+                    <div
+                      class="absolute inset-0 hidden transform bg-cover bg-center bg-no-repeat opacity-30 blur-sm grayscale transition-all duration-300 dark:block"
+                      style={{ backgroundImage: `url(${image.dark})` }}
+                    />
+                  )}
                 </a>
               )}
               <div
-                class={`relative z-10 flex items-center justify-between space-x-[10px]`}>
-                <div class='flex items-center gap-2'>
-                  <Icon name='mdi:folder-outline' class='size-4' />
-                  <div class='flex items-center gap-[6px]'>
+                class={`relative z-10 flex items-center justify-between space-x-[10px]`}
+              >
+                <div class="flex items-center gap-2">
+                  <Icon name="mdi:folder-outline" class="size-4" />
+                  <div class="flex items-center gap-[6px]">
                     {isActive ? (
                       <a
-                        class='group flex items-center gap-[6px] text-lg decoration-dotted underline-offset-[5px] hover:text-skin-hue hover:underline'
+                        class="group flex items-center gap-[6px] text-lg decoration-dotted underline-offset-[5px] hover:text-skin-hue hover:underline"
                         href={url}
                         title={`Ver ${name}`}
-                        target='_blank'>
+                        target="_blank"
+                      >
                         {name}
-                        <span class='text-skin-hue transition ease-linear group-hover:-translate-y-0.5 group-hover:translate-x-0.5'>
-                          <Icon name='ri:arrow-up-line' class='rotate-45' />
+                        <span class="text-skin-hue transition ease-linear group-hover:-translate-y-0.5 group-hover:translate-x-0.5">
+                          <Icon name="ri:arrow-up-line" class="rotate-45" />
                         </span>
                       </a>
                     ) : (
@@ -52,11 +64,12 @@ import { Image } from 'astro:assets'
                 {github && (
                   <a
                     href={github}
-                    title='View slug repository on GitHub'
-                    target='_blank'
-                    rel='noopener'
-                    class='opacity-75 transition duration-100 hover:opacity-100 hover:scale-125'>
-                    <Icon name='mdi:github' width={24} height={24} />
+                    title="View slug repository on GitHub"
+                    target="_blank"
+                    rel="noopener"
+                    class="opacity-75 transition duration-100 hover:scale-125 hover:opacity-100"
+                  >
+                    <Icon name="mdi:github" width={24} height={24} />
                   </a>
                 )}
               </div>
@@ -65,34 +78,48 @@ import { Image } from 'astro:assets'
                 {description}
               </p>
               <ul class={`relative z-10 mt-1 text-sm text-skin-inverted`}>
-                {highlights.map(highlight => {
-                  return <li>{highlight}</li>
+                {highlights.map((highlight) => {
+                  return <li>{highlight}</li>;
                 })}
               </ul>
               {isContainerImage && (
-                <a data-src={image.url} data-fancybox='projects'>
+                <a data-src={image.url} data-fancybox="projects">
                   <Image
                     src={image.url}
-                    alt=''
+                    alt=""
                     width={1920}
                     height={1080}
-                    class='mt-3 max-w-full rounded-lg'
+                    class:list={[
+                      "mt-3 max-w-full rounded-lg",
+                      image.dark ? "dark:hidden" : "",
+                    ]}
                   />
+                  {image.dark && (
+                    <Image
+                      src={image.dark}
+                      alt=""
+                      width={1920}
+                      height={1080}
+                      class="mt-3 hidden max-w-full rounded-lg dark:block"
+                    />
+                  )}
                 </a>
               )}
               {isBackgroundImage && (
-                <p class='absolute bottom-2 right-2 text-skin-muted text-sm font-mono'>Click blank to enlarge</p>
+                <p class="absolute bottom-2 right-2 font-mono text-sm text-skin-muted">
+                  Click blank to enlarge
+                </p>
               )}
             </div>
-          )
-        }
+          );
+        },
       )
     }
   </div>
 </Section>
 <script>
-  import { Fancybox } from '@fancyapps/ui'
-  Fancybox.bind('[data-fancybox="projects"]', { hideScrollbar: false })
+  import { Fancybox } from "@fancyapps/ui";
+  Fancybox.bind('[data-fancybox="projects"]', { hideScrollbar: false });
 </script>
 
 <style>

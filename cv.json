@@ -365,8 +365,9 @@
     {
       "name": "Cloudflare Vmail",
       "image": {
-        "url": "https://i0.hdslb.com/bfs/article/4d0bf8a784d22e54e3e61763c361c9ef480025691.png@100q_1e_1c.webp",
-        "position": "container"
+        "url": "https://i0.hdslb.com/bfs/article/985e2caa8266dee4b9861ee6a341886d480025691.png@1e_1c.webp",
+        "position": "container",
+        "dark": "https://i0.hdslb.com/bfs/article/4d0bf8a784d22e54e3e61763c361c9ef480025691.png@100q_1e_1c.webp"
       },
       "isActive": true,
       "description": "An open source temporary email tool, fully on Cloudflare. Inspired by oiov/vmail",
