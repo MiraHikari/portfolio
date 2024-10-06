@@ -4,7 +4,7 @@
 
 ## 📄 About
 
-This project is refactored from the original [**dev-portfolio**](https://github.com/Smilesharks/dev-portfolio) project, thanks to his work.
+This project is refactored from the original [**dev-portfolio**](https://github.com/Smilesharks/dev-portfolio) project, thanks for his work.
 
 I use iconify instead of SVG icons for better dev experience.
 
