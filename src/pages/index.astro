@@ -32,7 +32,7 @@ const { name, label } = basics;
     >
       <Experience className="print:col-span-3" />
       {
-        !CV.isProjectsAlone && (
+        CV?.isSingleColumn && (
           <>
             <Projects className="print:hidden" />
             {CV?.images && <Images className="print:hidden" />}
@@ -43,7 +43,7 @@ const { name, label } = basics;
       }
     </div>
     {
-      CV.isProjectsAlone && (
+      CV?.isSingleColumn && (
         <>
           <div class="slide-enter-content space-y-4 md:col-span-6">
             <Projects className="print:hidden" />
