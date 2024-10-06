@@ -29,7 +29,7 @@ Or you can manually deploy the repo, read more.
 
 # Initialize the project
 ```bash
-pnpm create astro@latest -- --template MiraHikari/portfolio
+pnpm create astro@latest --template MiraHikari/portfolio
 ```
 
 ### 2. Add Your Content:
