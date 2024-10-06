@@ -32,7 +32,7 @@ const { name, label } = basics;
     >
       <Experience className="print:col-span-3" />
       {
-        CV?.isSingleColumn && (
+        !CV?.isSingleColumn && (
           <>
             <Projects className="print:hidden" />
             {CV?.images && <Images className="print:hidden" />}
