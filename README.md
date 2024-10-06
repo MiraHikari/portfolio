@@ -18,19 +18,18 @@ Thanks for antfu's cool animations.
 
 ## 🚀 Getting Started
 
+### 0. One-click to deploy on Vercel
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/MiraHikari/portfolio&project-name=portfolio&repository-name=portfolio)
+
+Or you can manually deploy the repo, read more.
+
 ### 1. Use this Repo as an Astro Project Template
 
 - I use [pnpm](https://pnpm.io/installation) as my package manager.
 
-```bash
-# Enable pnpm on MacOS, WSL & Linux:
-corepack enable
-corepack prepare pnpm@latest --activate
-```
-
 # Initialize the project
 ```bash
-pnpm create astro@latest -- --template Smilesharks/dev-portfolio
+pnpm create astro@latest -- --template MiraHikari/portfolio
 ```
 
 ### 2. Add Your Content:
@@ -46,7 +45,7 @@ pnpm dev
 1. Open [**http://localhost:4321**](http://localhost:4321/) in your browser to view the result 🚀
 
 ### 4. Customisable colours:
-Change the data-theme of `cv.json` and choose one of the colour themes defined in theme.css, red, blue, green, cyber and default, with its variants in dark mode, or create your own.
+Change the data-theme of `cv.json` and choose one of the colour themes defined in theme.css, red, blue, green, cyber, pink and default, with its variants in dark mode, or create your own.
 
 ## 🧞 Commands
 
