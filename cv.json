@@ -40,12 +40,12 @@
   },
   "images": [
     {
-      "image": "https://tvax2.sinaimg.cn/large/007Z4zUAgy1huc8kl8wt4j32o03xskjm.jpg",
+      "image": "https://i0.hdslb.com/bfs/article/6b4c99037b4a33a9d1a0f97aa7072fc1480025691.jpg@90q_1e_1c.webp",
       "alt": "Sunset in Nanchang",
       "desc": "Shot on a sunny day in Nanchang. 2024.10.05"
     },
     {
-      "image": "https://tvax4.sinaimg.cn/large/007Z4zUAgy1huc8k11gstj32dc3i0npe.jpg",
+      "image": "https://i0.hdslb.com/bfs/article/78ffcef7ba3429e847e2bb189f0db92f480025691.jpg@90q_1e_1c.webp",
       "alt": "My Cat",
       "desc": "A Ragdoll cat who stayed for a year. She's a girl."
     }
@@ -54,7 +54,7 @@
     {
       "institution": "Nanchang No.27 Middle School",
       "url": "",
-      "area": "regular student",
+      "area": "Regular Student",
       "studyType": "Full-time student",
       "startDate": "2020-9-01",
       "endDate": null
@@ -349,6 +349,10 @@
   "projects": [
     {
       "name": "Cloudflare Vmail",
+      "image": {
+        "url": "https://i0.hdslb.com/bfs/article/4d0bf8a784d22e54e3e61763c361c9ef480025691.png@100q_1e_1c.webp",
+        "position": "container"
+      },
       "isActive": true,
       "description": "An open source temporary email tool, fully on Cloudflare. Inspired by oiov/vmail",
       "highlights": [
@@ -362,7 +366,10 @@
     },
     {
       "name": "Riddle Town Hunt 2",
-      "bgUrl": "https://rth2-webstatic.gbclstudio.cn/wp-content/uploads/2024/02/1707656250-76b2b0d2c94824e89a2b8b2c7d1c6afe.png",
+      "image": {
+        "url": "https://rth2-webstatic.gbclstudio.cn/wp-content/uploads/2024/02/1707656250-76b2b0d2c94824e89a2b8b2c7d1c6afe.png",
+        "position": "background"
+      },
       "isActive": true,
       "description": "Public decryption activity in the form of Puzzle Hunt.",
       "highlights": [
