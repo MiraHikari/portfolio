@@ -168,7 +168,7 @@
     {
       "name": "JavaScript",
       "icon": "simple-icons:javascript",
-      "level": "Intermediate",
+      "level": "Expert",
       "keywords": [
         "Web Development",
         "Frontend",
@@ -190,7 +190,7 @@
     {
       "name": "TypeScript",
       "icon": "simple-icons:typescript",
-      "level": "Intermediate",
+      "level": "Expert",
       "keywords": [
         "Web Development",
         "Frontend",
@@ -244,7 +244,7 @@
     {
       "name": "GitHub",
       "icon": "mdi:github",
-      "level": "Intermediate",
+      "level": "Expert",
       "keywords": [
         "Version Control",
         "Collaboration",
@@ -255,7 +255,7 @@
     {
       "name": "Next.js",
       "icon": "ri:nextjs-line",
-      "level": "Beginner",
+      "level": "Intermediate",
       "keywords": [
         "Web Development",
         "Frontend",
@@ -267,7 +267,7 @@
     {
       "name": "React",
       "icon": "mdi:react",
-      "level": "Intermediate",
+      "level": "Expert",
       "keywords": [
         "Web Development",
         "Frontend",
@@ -306,6 +306,16 @@
       ]
     },
     {
+      "name": "Vite",
+      "icon": "simple-icons:vite",
+      "level": "Intermediate",
+      "keywords": [
+        "Web Development",
+        "Frontend",
+        "Build Tool"
+      ]
+    },
+    {
       "name": "WordPress",
       "icon": "ri:wordpress-fill",
       "level": "Intermediate",
@@ -333,6 +343,81 @@
         "Frontend",
         "SSR",
         "Static Generation"
+      ]
+    },
+    {
+      "name": "PHP",
+      "icon": "simple-icons:php",
+      "level": "Intermediate",
+      "keywords": [
+        "Web Development",
+        "Backend",
+        "Fullstack"
+      ]
+    },
+    {
+      "name": "Tauri",
+      "icon": "simple-icons:tauri",
+      "level": "Beginner",
+      "keywords": [
+        "Desktop App",
+        "Rust",
+        "Webview"
+      ]
+    },
+    {
+      "name": "Rust",
+      "icon": "simple-icons:rust",
+      "level": "Beginner",
+      "keywords": [
+        "Desktop App",
+        "Webview"
+      ]
+    },
+    {
+      "name": "Socket.IO",
+      "icon": "simple-icons:socketdotio",
+      "level": "Beginner",
+      "keywords": [
+        "Realtime",
+        "Websocket"
+      ]
+    },
+    {
+      "name": "Electron",
+      "icon": "simple-icons:electron",
+      "level": "Beginner",
+      "keywords": [
+        "Desktop App",
+        "Webview"
+      ]
+    },
+    {
+      "name": "Shell",
+      "icon": "simple-icons:shell",
+      "level": "Intermediate",
+      "keywords": [
+        "Scripting",
+        "Automation"
+      ]
+    },
+    {
+      "name": "Linux",
+      "icon": "simple-icons:linux",
+      "level": "Intermediate",
+      "keywords": [
+        "OS",
+        "Scripting",
+        "Automation"
+      ]
+    },
+    {
+      "name": "Cloudflare Edge Functions",
+      "icon": "simple-icons:cloudflare",
+      "level": "Expert",
+      "keywords": [
+        "Serverless",
+        "Edge Computing"
       ]
     }
   ],

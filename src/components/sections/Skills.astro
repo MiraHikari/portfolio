@@ -6,11 +6,11 @@ import { Icon } from 'astro-icon/components'
 
 <Section className={Astro.props.className} title='Skills'>
   <ul
-    class='inline-flex print:mt-4 flex-wrap gap-6 [&>li>svg]:text-skin-hue [&>li]:text-sm'>
+    class='inline-flex print:mt-4 flex-wrap gap-4 [&>li>svg]:text-skin-hue [&>li]:text-sm'>
     {
-      skills.map(({ name, icon }) => {
+      skills.map(({ name, icon, level}) => {
         return (
-          <li class='flex items-center gap-1 rounded-md border border-solid border-skin-hue/20 bg-skin-button-accent/20 px-2 py-0.5 text-xs text-skin-hue print:border-none print:bg-transparent print:p-0 print:text-zinc-800'>
+          <li class='flex items-center gap-1 rounded-md border border-solid border-skin-hue/20 bg-skin-button-accent/20 px-1 py-0.5 text-xs text-skin-hue print:border-none print:bg-transparent print:p-0 print:text-zinc-800' title={level}>
             {icon && <Icon name={icon} width={16} height={16} />}{' '}
             <span>{name}</span>
           </li>

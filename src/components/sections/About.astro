@@ -1,12 +1,13 @@
 ---
 import Section from "../Section.astro";
 
-import { basics } from "@cv";
-const { summary } = basics;
+import CV from "@cv";
+const { summary } = CV.basics;
 ---
 
 <Section title="About">
-	<p class="opacity-75 font-mono">
-		{summary}
-	</p>
+  <p class="font-mono opacity-75">
+    {summary}
+  </p>
 </Section>
+
