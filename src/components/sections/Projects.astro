@@ -39,7 +39,7 @@ import { Image } from 'astro:assets'
                         title={`Ver ${name}`}
                         target='_blank'>
                         {name}
-                        <span class='text-skin-hue transition ease-linear group-data-[clicked=true]:-translate-y-0.5 group-data-[clicked=true]:translate-x-0.5'>
+                        <span class='text-skin-hue transition ease-linear group-hover:-translate-y-0.5 group-hover:translate-x-0.5'>
                           <Icon name='ri:arrow-up-line' class='rotate-45' />
                         </span>
                       </a>
@@ -55,8 +55,8 @@ import { Image } from 'astro:assets'
                     title='View slug repository on GitHub'
                     target='_blank'
                     rel='noopener'
-                    class='opacity-75 transition-opacity duration-100 hover:opacity-100'>
-                    <Icon name='mdi:github' width={16} height={16} />
+                    class='opacity-75 transition duration-100 hover:opacity-100 hover:scale-125'>
+                    <Icon name='mdi:github' width={24} height={24} />
                   </a>
                 )}
               </div>

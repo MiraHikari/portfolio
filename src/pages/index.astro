@@ -60,6 +60,10 @@ const { name, label } = basics;
 </Layout>
 
 <style is:global>
+  * {
+    scrollbar-color: var(--color-button-muted) var(--color-fill);
+  }
+
   @page {
     size: auto;
     margin: 0mm;
@@ -68,6 +72,7 @@ const { name, label } = basics;
     margin: auto;
     width: 100%;
   }
+
   @keyframes slide-enter {
     0% {
       transform: translateY(10px);
@@ -79,13 +84,14 @@ const { name, label } = basics;
       opacity: 1;
     }
   }
+
   @media (prefers-reduced-motion: no-preference) {
     .slide-enter,
-    .slide-enter-content {
+    .slide-enter-content > *:not(:has(.table-of-contents)) {
       --enter-stage: 0;
-      --enter-step: 100ms;
+      --enter-step: 400ms;
       --enter-initial: 0ms;
-      animation: slide-enter 1.8s both 1;
+      animation: slide-enter 1s both 1;
       animation-delay: calc(
         var(--enter-initial) + var(--enter-stage) * var(--enter-step)
       );
