@@ -1,38 +1,59 @@
 ---
-import Layout from '@/layouts/Layout.astro'
+import Layout from "@/layouts/Layout.astro";
 
-import About from '@/components/sections/About.astro'
-import Experience from '@/components/sections/Experience.astro'
-import Hero from '@/components/sections/Hero.astro'
-import Projects from '@/components/sections/Projects.astro'
-import Skills from '@/components/sections/Skills.astro'
-import Tail from '@/components/sections/Tail.astro'
-import KeyboardManager from '@/components/KeyboardManager.astro'
-import ThemeSwitch from '@/components/ThemeSwitch.astro'
+import About from "@/components/sections/About.astro";
+import Experience from "@/components/sections/Experience.astro";
+import Hero from "@/components/sections/Hero.astro";
+import Projects from "@/components/sections/Projects.astro";
+import Skills from "@/components/sections/Skills.astro";
+import Tail from "@/components/sections/Tail.astro";
+import KeyboardManager from "@/components/KeyboardManager.astro";
+import ThemeSwitch from "@/components/ThemeSwitch.astro";
 
-import CV, { basics } from '@cv'
-import Education from '@/components/sections/Education.astro'
-import Images from '@/components/sections/Images.astro'
-const { name, label } = basics
+import CV, { basics } from "@cv";
+import Education from "@/components/sections/Education.astro";
+import Images from "@/components/sections/Images.astro";
+const { name, label } = basics;
 ---
 
 <Layout title={`${name}'s' Portfolio - ${label}`}>
   <main
-    class='relative grid max-w-7xl gap-12 p-8 max-sm:py-16 md:grid-cols-6 md:p-16 xl:gap-24 print:max-w-none print:grid-cols-1 print:gap-6'>
+    class="relative grid max-w-7xl gap-12 p-8 max-sm:py-16 md:grid-cols-6 md:p-16 xl:gap-24 print:max-w-none print:grid-cols-1 print:gap-6"
+  >
     <div
-      class='slide-enter space-y-6 ease-in md:col-span-2 print:col-span-1 print:grid print:grid-cols-2 print:gap-5 print:space-y-0'>
+      class="slide-enter space-y-6 ease-in md:col-span-2 print:col-span-1 print:grid print:grid-cols-2 print:gap-5 print:space-y-0"
+    >
       <Hero />
       <About />
       <ThemeSwitch />
     </div>
     <div
-      class='slide-enter-content space-y-12 md:col-span-4 print:col-span-1 print:grid print:grid-cols-4 print:gap-2 print:space-y-0'>
-      <Experience className='print:col-span-3' />
-      <Projects className='print:hidden' />
-      {CV?.images && <Images className="print:hidden"/>}
-      {CV?.education && <Education className='order-first' />}
-      <Skills className='print:hidden' />
+      class="slide-enter-content space-y-12 md:col-span-4 print:col-span-1 print:grid print:grid-cols-4 print:gap-2 print:space-y-0"
+    >
+      <Experience className="print:col-span-3" />
+      {
+        !CV.isProjectsAlone && (
+          <>
+            <Projects className="print:hidden" />
+            {CV?.images && <Images className="print:hidden" />}
+            {CV?.education && <Education className="order-first" />}
+            <Skills className="print:hidden" />
+          </>
+        )
+      }
     </div>
+    {
+      CV.isProjectsAlone && (
+        <>
+          <div class="slide-enter-content space-y-4 md:col-span-6">
+            <Projects className="print:hidden" />
+            {CV?.images && <Images className="print:hidden" />}
+            {CV?.education && <Education className="order-first" />}
+            <Skills className="print:hidden" />
+          </div>
+        </>
+      )
+    }
     <Tail />
   </main>
   <KeyboardManager />

@@ -1,5 +1,6 @@
 {
   "analyticsCode": "/clarity.js",
+  "isProjectsAlone": true,
   "basics": {
     "name": "MiraHikari",
     "label": "Junior Full Stack Developer",
