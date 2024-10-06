@@ -1,33 +1,39 @@
 ---
-import { Image } from 'astro:assets'
-import Section from '../Section.astro'
+import { Image } from "astro:assets";
+import Section from "../Section.astro";
 
-import CV from '@cv'
-const images = CV.images!
+import CV from "@cv";
+const images = CV.images!;
 ---
 
-<Section className={Astro.props.className} title='Images'>
-  <div class='grid grid-cols-1 gap-2 md:grid-cols-2'>
+<Section class={Astro.props.class} title="Images">
+  <div
+    class="grid grid-cols-1 gap-3 p-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+  >
     {
-      images &&
-        images.map(({ image, alt, desc }) => (
-          <div class='h-auto max-w-prose rounded-lg border border-solid border-skin-hue/20 bg-skin-button-accent/20 p-1 text-skin-hue'>
-            <a data-src={image} data-fancybox='images' data-caption={desc}>
-              <Image
-                src={image}
-                alt={alt}
-                height={1920}
-                width={1080}
-                class='max-w-full rounded-lg'
-              />
-            </a>
-          </div>
-        ))
+      images.map(({ image, alt, desc }) => (
+        <div class="relative overflow-hidden rounded-lg border border-skin-hue/20 bg-skin-button-accent/20 p-1">
+          <a
+            href={image}
+            data-fancybox="gallery"
+            data-caption={desc}
+            class="block aspect-square"
+          >
+            <Image
+              src={image}
+              alt={alt}
+              width={500}
+              height={500}
+              class="h-full w-full object-cover transition-transform duration-300 hover:scale-105"
+            />
+          </a>
+        </div>
+      ))
     }
   </div>
 </Section>
 
 <script>
-  import { Fancybox } from '@fancyapps/ui'
-  Fancybox.bind('[data-fancybox="images"]', { hideScrollbar: false })
+  import { Fancybox } from "@fancyapps/ui";
+  Fancybox.bind('[data-fancybox="gallery"]', { hideScrollbar: false });
 </script>

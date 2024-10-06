@@ -42,14 +42,24 @@
   },
   "images": [
     {
-      "image": "https://i0.hdslb.com/bfs/article/6b4c99037b4a33a9d1a0f97aa7072fc1480025691.jpg@90q_1e_1c.webp",
+      "image": "https://i0.hdslb.com/bfs/article/6720a7355fd11b9666e2716cadf04e45480025691.jpg@100q_1e_1c.webp",
       "alt": "Sunset in Nanchang",
       "desc": "Shot on a sunny day in Nanchang. 2024.10.05"
     },
     {
-      "image": "https://i0.hdslb.com/bfs/article/78ffcef7ba3429e847e2bb189f0db92f480025691.jpg@90q_1e_1c.webp",
+      "image": "https://i0.hdslb.com/bfs/article/82f680f56532d942f74d86801abf49ea480025691.jpg@100q_1e_1c.webp",
       "alt": "My Cat",
       "desc": "A Ragdoll cat who stayed for a year. She's a girl."
+    },
+    {
+      "image": "https://i0.hdslb.com/bfs/article/14e6ae3c368b0eddeeb2b5c338239486480025691.jpg@100q_1e_1c.webp",
+      "alt": "Emoji",
+      "desc": "True, dude"
+    },
+    {
+      "image": "https://i0.hdslb.com/bfs/article/bf0a653b3fee0f474218e9043ca63f58480025691.jpg@100q_1e_1c.webp",
+      "alt": "基尼奇",
+      "desc": "Genshin, great."
     }
   ],
   "education": [
