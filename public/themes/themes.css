@@ -64,11 +64,16 @@
       --color-text-base: 40, 40, 40;
       --color-text-muted: 110, 110, 110;
       --color-text-inverted: 255, 240, 245;
-      --color-fill: 255, 228, 235;
-      --muted: 230, 190, 200;
-      --color: 255, 105, 180;
-      --color-button-accent: 255, 105, 180;
-      --color-button-accent-hover: 255, 182, 193;
+      --color-fill: 248, 187, 208;
+      /* Material Design Pink 100 */
+      --muted: 244, 143, 177;
+      /* Material Design Pink 200 */
+      --color: 233, 30, 99;
+      /* Material Design Pink 500 */
+      --color-button-accent: 233, 30, 99;
+      /* Material Design Pink 500 */
+      --color-button-accent-hover: 194, 24, 91;
+      /* Material Design Pink 700 */
       --color-button-muted: 255, 240, 245;
     }
   }
