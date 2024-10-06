@@ -14,11 +14,17 @@ import CV, { basics } from "@cv";
 import Education from "@/components/sections/Education.astro";
 import Images from "@/components/sections/Images.astro";
 const { name, label } = basics;
+
+enum PageLayout {
+  SingleColumn = "single-column",
+  TwoColumn = "two-column",
+  Scroll = "scroll",
+}
 ---
 
 <Layout title={`${name}'s' Portfolio - ${label}`}>
   <main
-    class="relative grid max-w-7xl gap-12 p-8 max-sm:py-16 md:grid-cols-6 md:p-16 xl:gap-24 print:max-w-none print:grid-cols-1 print:gap-6"
+    class="relative grid h-full md:min-h-screen max-w-7xl gap-12 p-8 max-sm:py-16 md:grid-cols-6 md:p-16 xl:gap-24 print:max-w-none print:grid-cols-1 print:gap-6"
   >
     <div
       class="slide-enter space-y-6 ease-in md:col-span-2 print:col-span-1 print:grid print:grid-cols-2 print:gap-5 print:space-y-0"
@@ -32,7 +38,7 @@ const { name, label } = basics;
     >
       <Experience className="print:col-span-3" />
       {
-        !CV?.isSingleColumn && (
+        (CV?.pageLayout === PageLayout.TwoColumn || !CV?.pageLayout) && (
           <>
             <Projects className="print:hidden" />
             {CV?.images && <Images className="print:hidden" />}
@@ -42,22 +48,114 @@ const { name, label } = basics;
         )
       }
     </div>
-    {
-      CV?.isSingleColumn && (
-        <>
-          <div class="slide-enter-content space-y-4 md:col-span-6">
-            <Projects className="print:hidden" />
-            {CV?.images && <Images className="print:hidden" />}
-            {CV?.education && <Education className="order-first" />}
-            <Skills className="print:hidden" />
-          </div>
-        </>
-      )
-    }
-    <Tail />
   </main>
+  {
+    CV?.pageLayout !== PageLayout.TwoColumn && (
+      <>
+        <div class="border-t border-solid border-skin-hue print:hidden" />
+        {CV?.pageLayout === PageLayout.SingleColumn && (
+          <main class="relative grid gap-12 p-8 max-sm:py-16 md:grid-cols-6 md:p-16 xl:gap-24 print:max-w-none print:grid-cols-1 print:gap-6">
+            <div class="slide-enter-content space-y-4 md:col-span-6">
+              <Projects className="print:hidden" />
+              {CV?.images && <Images className="print:hidden" />}
+              {CV?.education && <Education className="order-first" />}
+              <Skills className="print:hidden" />
+            </div>
+          </main>
+        )}
+
+        {CV.pageLayout === PageLayout.Scroll && (
+          <main class="max-w-[97%] p-8 max-md:!max-w-7xl max-sm:py-16 print:max-w-none print:grid-cols-1 print:gap-6">
+            <div
+              id="carousel"
+              class="slide-enter-content scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-200 mx-auto md:overflow-x-auto md:overflow-y-auto md:col-span-6 print:max-w-none print:grid-cols-1 print:gap-6"
+            >
+              <div class="flex space-x-0 pb-4 max-sm:flex-col max-sm:space-y-4 md:px-4 max-md:gap-4">
+                <Projects className="flex-shrink-0 w-full print:hidden border-skin-hue md:border-solid md:border md:p-4" />
+                {CV?.images && (
+                  <Images className="flex-shrink-0 w-full print:hidden border-skin-hue md:border-solid md:border md:p-4" />
+                )}
+                {CV?.education && (
+                  <Education className="flex-shrink-0 w-full md:w-1/3 print:order-first border-skin-hue md:border-solid md:border md:p-4" />
+                )}
+                <Skills className="flex-shrink-0 w-full md:w-1/3 print:hidden border-skin-hue md:border-solid md:border md:p-4" />
+              </div>
+            </div>
+          </main>
+        )}
+      </>
+    )
+  }
+  <Tail />
   <KeyboardManager />
 </Layout>
+
+<script>
+  let isScrolling = true;
+  let scrollSpeed = 2;
+  let direction = 1;
+  let pauseTimeout: NodeJS.Timeout;
+
+  // 自动滚动功能
+  const startAutoScroll = () => {
+    const carousel = document.querySelector("#carousel")!;
+    const scroll = () => {
+      if (!isScrolling) return;
+
+      if (
+        //@ts-ignore
+        carousel.scrollLeft + carousel.offsetWidth >= carousel.scrollWidth ||
+        carousel.scrollLeft <= 0
+      ) {
+        direction *= -1;
+        isScrolling = false;
+        clearTimeout(pauseTimeout);
+        pauseTimeout = setTimeout(() => {
+          isScrolling = true;
+          requestAnimationFrame(scroll);
+        }, 1000);
+      }
+
+      carousel.scrollLeft += scrollSpeed * direction;
+      requestAnimationFrame(scroll);
+    };
+
+    requestAnimationFrame(scroll);
+  };
+
+  const stopAutoScroll = () => {
+    isScrolling = false;
+  };
+
+  // 停止自动滚动的条件
+  const handleUserInteraction = () => {
+    stopAutoScroll();
+    setTimeout(() => {
+      isScrolling = true;
+    }, 500);
+  };
+
+  const carousel = document.getElementById("carousel")!;
+
+  // 启动自动滚动
+  startAutoScroll();
+
+  // 检测用户滚动交互，停止自动滚动
+  carousel.addEventListener("mousedown", handleUserInteraction);
+  carousel.addEventListener("wheel", handleUserInteraction);
+  carousel.addEventListener("touchstart", handleUserInteraction);
+</script>
+
+<style>
+  /* 自定义滚动条样式 */
+  .scrollbar-thin::-webkit-scrollbar {
+    height: 8px;
+  }
+  .scrollbar-thumb-gray-400::-webkit-scrollbar-thumb {
+    background-color: #a0aec0;
+    border-radius: 4px;
+  }
+</style>
 
 <style is:global>
   * {
