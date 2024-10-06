@@ -13,5 +13,11 @@ export default defineConfig({
       'ri': ['*'],
       'simple-icons': ['*'],
     },
-  }), playformCompress()],
+  }), playformCompress({
+    CSS: false,
+    Image: false,
+    Action: {
+      Passed: async () => true,   // https://github.com/PlayForm/Compress/issues/376
+    },
+  })],
 });

@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
-    "build": "astro check && astro build",
+    "build": "rimraf ./dist && astro check && astro build",
     "preview": "astro preview",
     "astro": "astro",
     "deploy": "astro build && wrangler pages deploy"
@@ -30,6 +30,7 @@
   "devDependencies": {
     "prettier": "^3.3.3",
     "prettier-plugin-astro": "^0.14.1",
+    "rimraf": "^6.0.1",
     "wrangler": "^3.80.0"
   }
 }
