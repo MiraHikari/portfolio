@@ -1,29 +1,57 @@
 ---
-// ArtPlum.astro
+// Designed by Antfu.
 ---
 
 <div
-  class="fixed top-0 bottom-0 left-0 right-0 pointer-events-none print:hidden"
+  class="pointer-events-none fixed bottom-0 left-0 right-0 top-0 print:hidden"
   style="mask-image: radial-gradient(circle, transparent, black); -webkit-mask-image: radial-gradient(circle, transparent, black);"
 >
   <canvas id="artPlumCanvas" width="400" height="400"></canvas>
 </div>
 
-<script is:inline>
+<script>
   const r180 = Math.PI;
   const r90 = Math.PI / 2;
   const r15 = Math.PI / 12;
-  const color = '#88888825';
+  const color = "#88888825";
 
   const MIN_BRANCH = 30;
   const len = 6;
 
-  const randomMiddle = () => Math.random() * 0.6 + 0.2;
+  const randomMiddle = (): number => Math.random() * 0.6 + 0.2;
 
-  const initCanvas = (canvas, width = 400, height = 400, _dpi) => {
-    const ctx = canvas.getContext('2d');
+  interface CanvasSize {
+    width: number;
+    height: number;
+  }
+
+  interface Counter {
+    value: number;
+  }
+
+  const initCanvas = (
+    canvas: HTMLCanvasElement,
+    width: number = 400,
+    height: number = 400,
+    _dpi?: number,
+  ) => {
+    const ctx = canvas.getContext("2d");
+    if (!ctx) throw new Error("Unable to get canvas context");
+
     const dpr = window.devicePixelRatio || 1;
-    const bsr = ctx.webkitBackingStorePixelRatio || ctx.mozBackingStorePixelRatio || ctx.msBackingStorePixelRatio || ctx.oBackingStorePixelRatio || ctx.backingStorePixelRatio || 1;
+
+    const bsr =
+      //@ts-ignore
+      ctx.webkitBackingStorePixelRatio ||
+      //@ts-ignore
+      ctx.mozBackingStorePixelRatio ||
+      //@ts-ignore
+      ctx.msBackingStorePixelRatio ||
+      //@ts-ignore
+      ctx.oBackingStorePixelRatio ||
+      //@ts-ignore
+      ctx.backingStorePixelRatio ||
+      1;
     const dpi = _dpi || dpr / bsr;
 
     canvas.style.width = `${width}px`;
@@ -35,21 +63,34 @@
     return { ctx, dpi };
   };
 
-  const polar2cart = (x = 0, y = 0, r = 0, theta = 0) => {
+  const polar2cart = (
+    x: number = 0,
+    y: number = 0,
+    r: number = 0,
+    theta: number = 0,
+  ): [number, number] => {
     const dx = r * Math.cos(theta);
     const dy = r * Math.sin(theta);
     return [x + dx, y + dy];
   };
 
-  const canvas = document.getElementById('artPlumCanvas');
-  const size = { width: window.innerWidth, height: window.innerHeight };
+  const canvas = document.getElementById("artPlumCanvas") as HTMLCanvasElement;
+  const size: CanvasSize = {
+    width: window.innerWidth,
+    height: window.innerHeight,
+  };
   const { ctx } = initCanvas(canvas, size.width, size.height);
   const { width, height } = canvas;
 
-  let steps = [];
-  let prevSteps = [];
+  let steps: Array<() => void> = [];
+  let prevSteps: Array<() => void> = [];
 
-  const step = (x, y, rad, counter = { value: 0 }) => {
+  const step = (
+    x: number,
+    y: number,
+    rad: number,
+    counter: Counter = { value: 0 },
+  ): void => {
     const length = Math.random() * len;
     counter.value += 1;
 
@@ -63,35 +104,35 @@
     const rad1 = rad + Math.random() * r15;
     const rad2 = rad - Math.random() * r15;
 
-    if (nx < -100 || nx > size.width + 100 || ny < -100 || ny > size.height + 100)
+    if (
+      nx < -100 ||
+      nx > size.width + 100 ||
+      ny < -100 ||
+      ny > size.height + 100
+    )
       return;
 
     const rate = counter.value <= MIN_BRANCH ? 0.8 : 0.5;
 
-    if (Math.random() < rate)
-      steps.push(() => step(nx, ny, rad1, counter));
-    if (Math.random() < rate)
-      steps.push(() => step(nx, ny, rad2, counter));
+    if (Math.random() < rate) steps.push(() => step(nx, ny, rad1, counter));
+    if (Math.random() < rate) steps.push(() => step(nx, ny, rad2, counter));
   };
 
-  const frame = () => {
+  const frame = (): void => {
     prevSteps = steps;
     steps = [];
 
-    if (!prevSteps.length) {
-      return;
-    }
+    if (!prevSteps.length) return;
 
     prevSteps.forEach((i) => {
-      if (Math.random() < 0.5)
-        steps.push(i);
+      if (Math.random() < 0.5) steps.push(i);
       else i();
     });
 
     requestAnimationFrame(frame);
   };
 
-  const start = () => {
+  const start = (): void => {
     ctx.clearRect(0, 0, width, height);
     ctx.lineWidth = 1;
     ctx.strokeStyle = color;
@@ -102,14 +143,13 @@
       () => step(-5, randomMiddle() * size.height, 0),
       () => step(size.width + 5, randomMiddle() * size.height, r180),
     ];
-    if (size.width < 500)
-      steps = steps.slice(0, 2);
+    if (size.width < 500) steps = steps.slice(0, 2);
     requestAnimationFrame(frame);
   };
 
   start();
 
-  window.addEventListener('resize', () => {
+  window.addEventListener("resize", () => {
     size.width = window.innerWidth;
     size.height = window.innerHeight;
     initCanvas(canvas, size.width, size.height);
