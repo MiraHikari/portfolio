@@ -1,8 +1,9 @@
 {
+  "analyticsCode": "",
   "pageLayout": "two-column",
   "basics": {
     "name": "MiraHikari",
-    "label": "Junior Full Stack Developer",
+    "label": "Senior Full Stack Developer",
     "image": "/avatar.png",
     "email": "mirahikari@gcxstudio.cn",
     "url": "https://www.gcxstudio.cn",
@@ -58,9 +59,9 @@
         "desc": "True, dude"
       },
       {
-        "image": "https://i0.hdslb.com/bfs/article/bf0a653b3fee0f474218e9043ca63f58480025691.jpg@100q_1e_1c.webp",
-        "alt": "基尼奇",
-        "desc": "Genshin, great."
+        "image": "https://i0.hdslb.com/bfs/article/fe1737e9d7b6c2b21eedaf60b6dc9f86480025691.jpg@100q_1e_1c.webp",
+        "alt": "Cat Kernel Crashed",
+        "desc": "Cat Kernel Crashed"
       }
     ]
   },
@@ -76,7 +77,13 @@
   ],
   "certificates": [
     {
-      "name": "TCCP - Senior Cloud architecture engineer",
+      "name": "Success has lived a day in the world.",
+      "date": "2010-04-14",
+      "url": "",
+      "issuer": "Myself"
+    },
+    {
+      "name": "TCCP - Senior Cloud Architecture Engineer",
       "date": "2023-05-01",
       "url": "",
       "issuer": "Tencent Cloud"
@@ -109,6 +116,7 @@
         "React": "mdi:react",
         "SQL": "simple-icons:mysql",
         "Git": "mdi:git",
+        "GitHub": "mdi:github",
         "NestJS": "simple-icons:nestjs",
         "Vue": "mdi:vuejs"
       }
@@ -133,6 +141,12 @@
         "Ensured smooth project execution."
       ],
       "skills": {
+        "HTML": "simple-icons:html5",
+        "CSS": "ri:css3-fill",
+        "JavaScript": "simple-icons:javascript",
+        "TypeScript": "simple-icons:typescript",
+        "Vite": "simple-icons:vite",
+        "Node": "ri:nodejs-line",
         "Docker": "mdi:docker",
         "WordPress": "ri:wordpress-fill",
         "Astro": "simple-icons:astro",
@@ -355,6 +369,16 @@
       ]
     },
     {
+      "name": "Nginx",
+      "icon": "simple-icons:nginx",
+      "level": "Intermediate",
+      "keywords": [
+        "Web Development",
+        "Backend",
+        "Web Server"
+      ]
+    },
+    {
       "name": "Tauri",
       "icon": "simple-icons:tauri",
       "level": "Beginner",
@@ -408,6 +432,32 @@
         "OS",
         "Scripting",
         "Automation"
+      ]
+    },
+    {
+      "name": "Vercel",
+      "icon": "simple-icons:vercel",
+      "level": "Intermediate",
+      "keywords": [
+        "Serverless",
+        "Static Site Hosting"
+      ]
+    },
+    {
+      "name": "Netlify",
+      "icon": "simple-icons:netlify",
+      "level": "Intermediate",
+      "keywords": [
+        "Serverless",
+        "Static Site Hosting"
+      ]
+    },
+    {
+      "name": "Tencent Cloud",
+      "icon": "simple-icons:tencentqq",
+      "level": "Intermediate",
+      "keywords": [
+        "Cloud Service"
       ]
     },
     {

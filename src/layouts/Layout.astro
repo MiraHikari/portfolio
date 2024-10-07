@@ -1,6 +1,7 @@
 ---
 import ArtPlums from "@/components/ArtPlums.astro";
 import "@fancyapps/ui/dist/fancybox/fancybox.css";
+import '../globals.css'
 import CV from "@cv";
 
 interface Props {
@@ -33,7 +34,6 @@ const { image, summary, url, theme } = CV.basics;
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={summary} />
     <meta name="twitter:image" content="" />
-    <link rel="stylesheet" href="/themes/themes.css" />
     {CV?.analyticsCode && <script is:inline src={CV.analyticsCode} />}
   </head>
   <body data-theme={theme} class="relative bg-skin-fill font-sans">
