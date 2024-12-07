@@ -520,7 +520,7 @@
         "url": "https://rth2-webstatic.gbclstudio.cn/wp-content/uploads/2024/02/1707656250-76b2b0d2c94824e89a2b8b2c7d1c6afe.png",
         "position": "background"
       },
-      "isActive": true,
+      "isActive": false,
       "description": "Public decryption activity in the form of Puzzle Hunt.",
       "highlights": [
         "👌 More than 1000 people participated, system runs normally",

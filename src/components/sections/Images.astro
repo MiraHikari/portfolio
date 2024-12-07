@@ -13,7 +13,7 @@ const images = CV.images!;
   >
     {
       images.list.map(({ image, alt, desc }) => (
-        <div class="relative overflow-hidden rounded-lg border border-skin-hue/20 bg-skin-button-accent/20">
+       <div class="relative overflow-hidden rounded-lg border border-skin-hue/20 bg-skin-button-accent/20" style="height: 0; padding-bottom: 100%;">
           <a
             href={image}
             data-fancybox="gallery"
